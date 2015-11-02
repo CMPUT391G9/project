@@ -69,13 +69,16 @@
 						session.setAttribute("person_id",resSet.getInt("person_id")+"");
 					}
 					if(userClass.equals("a")){
-						response.sendRedirect("administrator.jsp"); 
+						response.sendRedirect("AdminPage.jsp"); 
 					}
-					else if(userClass.equals("i")){
-						response.sendRedirect("datacurator.jsp"); 
+					else if(userClass.equals("r")){
+						response.sendRedirect("RadPage.jsp"); 
 					}
-					else if(userClass.equals("s")){
-						response.sendRedirect("scientist.jsp");
+					else if(userClass.equals("d")){
+						response.sendRedirect("DoctorPage.jsp");
+					}
+					else if(userClass.equals("p")){
+						response.sendRedirect("PatientPage.jsp");
 					}
             	}
 			}

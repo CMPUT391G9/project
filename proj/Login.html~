@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<TITLE>Login Page</TITLE>
+</HEAD>
+<BODY background="BGP.jpg">
+	<!-- This is the login page -->
+	<BR></BR>
+	<BR></BR>
+	<BR></BR>
+	<H1>
+		<CENTER>
+			<font color=Gold>Ocean Observation System</font>
+		</CENTER>
+	</H1>
+	<H2>
+		<CENTER>
+			<font color=Teal>Please Login</font>
+		</CENTER>
+	</H2>
+	<FORM NAME="LoginForm" ACTION="Login.jsp" METHOD="post">
+		<p>
+		<CENTER>
+			<font color=#006030>Enter your user name and password:</font>
+		</CENTER>
+		</p>
+		<TABLE style="margin: 0px auto">
+			<TR>
+				<TD><B><I><font color=Maroon>User Name:</font></I></B></TD>
+				<TD><INPUT TYPE="text" NAME="USERNAME" VALUE="username"><BR></TD>
+			</TR>
+			<TR>
+				<TD><B><I><font color=Maroon>Password:</font></I></B></TD>
+				<TD><INPUT TYPE="password" NAME="PASSWORD" VALUE="password"></TD>
+			</TR>
+		</TABLE>
+		<CENTER>
+			<INPUT TYPE="submit" NAME="LOGIN" VALUE="LOGIN">
+		</CENTER>
+
+	</FORM>
+		<CENTER>
+			User Documentation:<a href='Documentation.html' target ='_blank'><b>Documentation</b></a>
+		</CENTER>
+</BODY>
+</HTML>

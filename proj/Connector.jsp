@@ -1,6 +1,6 @@
 <HTML>
 	<HEAD>
-		<TITLE>Database Connection Handle Page</TITLE>
+		<TITLE>DB Connection Handle Page</TITLE>
 	</HEAD>
 	<BODY>
 		<%@ page import="java.sql.*" %>
@@ -20,8 +20,8 @@
          				con.setAutoCommit(false);
         			}
         			catch(Exception e){
-        				out.println("<p><b>Unable to Connect Oracle Database!</b></p>");
-        				out.println("<p><b>Invalid Username or Password!</b></p>");
+        				out.println("<p><b>Unable to Connect Oracle DB!</b></p>");
+        				out.println("<p><b>Invalid UserName or Password!</b></p>");
         				out.println("<p><b>Press RETURN to the previous page.</b></p>");
             			out.println("<FORM NAME='ConnectFailForm' ACTION='Connector.html' METHOD='get'>");
             			out.println("    <CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='RETURN'></CENTER>");
