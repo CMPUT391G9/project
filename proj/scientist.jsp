@@ -30,9 +30,9 @@
         			out.println("    <CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='RETURN'></CENTER>");
         			out.println("</FORM>");
     			}
-				if (canConnect == true) {
+				
 	      			Statement s=con.createStatement();
-	            	ResultSet resSet=null;
+	            	        ResultSet resSet=null;
 	       			String sqlStatement=null;
 	         		
 	        		sqlStatement="SELECT person_id FROM users WHERE user_name='"+userName+"'";
@@ -57,25 +57,25 @@
 	       				last_name=resSet.getString("last_name");
 	            	}
 	        		out.println("<H1><CENTER><font color =Teal>Hello! Scientist: <a href='PersonalManage.jsp?Manage=1'><b>"+first_name+" "+last_name+"</b></a> You can:</font></CENTER></H1>");
+                               
 				}
-				try{
-					con.close();
-				}
-				catch(Exception e){
-					out.println("<hr>" + e.getMessage() + "<hr>");
-				}
-			}
-			else{
-				response.sendRedirect("Login.html");
-			}
+			
 		%>
 	<BR></BR>
+        <BR></BR>
+        <BR></BR>
 	<H3><CENTER><a href="Search.jsp?SearchRequest=1"><b>Search Records</b></a></CENTER></H3>
+        <BR></BR>
+        <BR></BR>
+        <BR></BR>
 	<HR></HR>
 	<CENTER>
 		<a href="Subscribe.jsp?UploadRecord=1"><b>Subscribe Data</b></a>
 	</CENTER>
 	<HR></HR>
+        <BR></BR>
+        <BR></BR>
+        <BR></BR>
         <HR></HR>
         <CENTER>
 		<a href="Analysis.jsp?UploadRecord=1"><b>Data Analysis</b></a>
