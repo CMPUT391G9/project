@@ -2,7 +2,7 @@
 <HEAD>
 <TITLE>Data Curator Home Page</TITLE>
 </HEAD>
-<BODY background="login.jpg">
+<BODY background="BGP.jpg">
 	<%@ page import="java.sql.*"%>
 	<%
                        
