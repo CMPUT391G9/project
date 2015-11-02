@@ -58,27 +58,24 @@
 					out.println("</FORM>");
 				}
 				else{
-					sqlStatement="SELECT class,person_id FROM users WHERE user_name='"+userName+"'";
+					sqlStatement="SELECT role,person_id FROM users WHERE user_name='"+userName+"'";
 					resSet = s.executeQuery(sqlStatement);
-					String userClass=null;
+					String userRole=null;
 					while(resSet.next()){
-						userClass=(resSet.getString("class")).trim();
-						session.removeAttribute("class");
-						session.setAttribute("class",userClass);
+						userRole=(resSet.getString("role")).trim();
+						session.removeAttribute("role");
+						session.setAttribute("role",userRole);
 						session.removeAttribute("person_id");
 						session.setAttribute("person_id",resSet.getInt("person_id")+"");
 					}
-					if(userClass.equals("a")){
-						response.sendRedirect("AdminPage.jsp"); 
+					if(userRole.equals("a")){
+						response.sendRedirect("administrator.jsp"); 
 					}
-					else if(userClass.equals("r")){
-						response.sendRedirect("RadPage.jsp"); 
+					else if(userRole.equals("d")){
+						response.sendRedirect("datacurator.jsp"); 
 					}
-					else if(userClass.equals("d")){
-						response.sendRedirect("DoctorPage.jsp");
-					}
-					else if(userClass.equals("p")){
-						response.sendRedirect("PatientPage.jsp");
+					else if(userRole.equals("s")){
+						response.sendRedirect("scientist.jsp");
 					}
             	}
 			}

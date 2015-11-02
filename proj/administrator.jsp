@@ -56,7 +56,7 @@
        				last=resSet.getString("last_name");
             	}
             	
-            	out.println("<H1><CENTER><font color =Teal>Welcome! Adminstrator <a href='PersonalInfo.jsp?Manage=1'><b>"+first+" "+last_name+"</b></a></font></CENTER></H1>");
+            	out.println("<H1><CENTER><font color =Teal>Welcome! Adminstrator <a href='PersonalInfo.jsp?Manage=1'><b>"+first+" "+last+"</b></a></font></CENTER></H1>");
         		out.println("<BR></BR>");
         		out.println("<BR></BR>");
         		out.println("<HR></HR>");
@@ -75,10 +75,31 @@
 				resSet=s.executeQuery(sqlStatement);
 				while(resSet.next()){
 					Integer p_id=resSet.getInt("person_id");
-					String first=resSet.getString("first_name");
-					String last=resSet.getString("last_name");
-					out.println("<CENTER><OPTION VALUE='"+person_id+"' SELECTED> "+first+" "+last+" ,ID: "+p_id+"</OPTION><INPUT TYPE='submit' NAME='PersonManage' VALUE='GO'></CENTER>");
+					String first_n=resSet.getString("first_name");
+					String last_n=resSet.getString("last_name");
+					out.println("<CENTER><OPTION VALUE='"+p_id+"' SELECTED> "+first_n+" "+last_n+" ,ID: "+p_id+"</OPTION><INPUT TYPE='submit' NAME='PersonManage' VALUE='GO'></CENTER>");
 				}
 				out.println("</SELECT></CENTER>");
 				out.println("<CENTER><a href ='AddPerson.jsp?AddPerson=1'><b>Add a person</b></a></CENTER>");
 				out.println("</FORM>");
+				
+				
+				out.println("<CENTER><font color =Teal> Manage a Sensor: </font></CENTER>");
+				out.println("<FORM NAME='ManagePersonFrom' ACTION='SensorManage.jsp' METHOD='post'>");
+				out.println("	<CENTER><SELECT NAME='ID'>");
+				sqlStatement="SELECT sensor_id, location, sensor_type FROM sensors";
+				resSet=s.executeQuery(sqlStatement);
+				while(resSet.next()){
+					Integer s_id=resSet.getInt("sensor_id");
+					String loc=resSet.getString("location");
+					String s_type=resSet.getString("sensor_type");
+					out.println("<CENTER><OPTION VALUE='"+s_id+"' SELECTED> "+loc+" "+s_type+" ,ID: "+s_id+"</OPTION><INPUT TYPE='submit' NAME='PersonManage' VALUE='GO'></CENTER>");
+				}
+				out.println("</SELECT></CENTER>");
+				out.println("<CENTER><a href ='AddSensor.jsp?AddPerson=1'><b>Add a sensor</b></a></CENTER>");
+				out.println("</FORM>");
+			}
+		%>
+	<CENTER>User Documentation:<a href='Documentation.html' target ='_blank'><b>Documentation</b></a></CENTER>
+	</BODY>
+</HTML>
