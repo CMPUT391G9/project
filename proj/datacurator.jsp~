@@ -2,11 +2,11 @@
 <HEAD>
 <TITLE>Data Curator Home Page</TITLE>
 </HEAD>
-<BODY background="BGP.jpg">
+<BODY background="login.jpg">
 	<%@ page import="java.sql.*"%>
 	<%
                        
-		if(session.getAttribute("class") != null && ((String)session.getAttribute("class")).equals("r")){
+		if(session.getAttribute("role") != null && ((String)session.getAttribute("role")).equals("d")){
 			String userName = (String)session.getAttribute("USERNAME");
 			String oracleId = (String)session.getAttribute("ORACLE_ID");
 			String oraclePassword=(String)session.getAttribute("ORACLE_PASSWORD");
@@ -29,7 +29,7 @@
             		out.println("    <CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='RETURN'></CENTER>");
             		out.println("</FORM>");
         		}
-			if(canConnect){
+
 				Statement s=con.createStatement();
 				ResultSet resSet=null;
 				String sqlStatement=null;
@@ -53,26 +53,21 @@
 					first_name=resSet.getString("first_name");
 					last_name=resSet.getString("last_name");
 				}
-				out.println("<H1><CENTER><font color =Teal>Hello! Data Curator <a href='PersonalManage.jsp?Manage=1'><b>"+first_name+" "+last_name+"</b></a> ,You can:</font></CENTER></H1>");
+				out.println("<BR></BR><BR></BR><BR></BR><H1><CENTER><font color=Gold>Hello! Data Curator: <a href='PersonalInfo.jsp?Manage=1'><b>"+first_name+" "+last_name+"</b></a> </font></CENTER></H1>");
+
+        		out.println("<BR></BR>");
+        		out.println("<H3><font color=Gold>This is an Uploading Module</font></H3>");
+
+                        out.println("<font color=DarkOrchid> Enter the recording Id to upload an audio recording:</font>");
+                        out.println("<FORM NAME='ResetAccountForm' ACTION='ResetAccount.jsp' METHOD='post'>");
+        		out.println("<INPUT TYPE='text' NAME='Username' VALUE=''> &nbsp;&nbsp;&nbsp;<INPUT TYPE='submit' NAME='Updateaccount' VALUE='GO'>");
+
+
 			}
-			try{
-				con.close();
-			}
-			catch(Exception e){
-				out.println("<hr>" + e.getMessage() + "<hr>");
-			}
-		}
-		else{
-			response.sendRedirect("Login.html");
-		}
+			
 	%>
 	<BR></BR>
-	<HR></HR>
-	<CENTER>
-		<a href="Upload.jsp?UploadRecord=1"><b>Upload Records</b></a>
-	</CENTER>
-	<HR></HR>
-	<BR></BR>
+        <BR></BR>
 	<FORM NAME='ReturnForm' ACTION='UserLogout.jsp' METHOD='get'>
 		<CENTER>
 			<INPUT TYPE='submit' NAME='BACK' VALUE='Log out'>
