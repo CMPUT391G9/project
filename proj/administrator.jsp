@@ -6,7 +6,7 @@
 	<BODY background="login.jpg">
 		<%@ page import="java.sql.*"%>
 		<%
-			if(session.getAttribute("class") != null && ((String)session.getAttribute("class")).equals("a")){
+			if(session.getAttribute("role") != null && ((String)session.getAttribute("role")).equals("a")){
 				String userName=(String)session.getAttribute("USERNAME");
 				String oracleId=(String)session.getAttribute("ORACLE_ID");
     			String oraclePassword=(String)session.getAttribute("ORACLE_PASSWORD");
@@ -56,50 +56,63 @@
        				last=resSet.getString("last_name");
             	}
             	
-            	out.println("<H1><CENTER><font color =Teal>Welcome! Adminstrator <a href='PersonalInfo.jsp?Manage=1'><b>"+first+" "+last+"</b></a></font></CENTER></H1>");
+            	out.println("<BR></BR>");
+            	out.println("<H1><font color =Gold>Welcome! Adminstrator <a href='PersonalInfo.jsp?Manage=1'><b>"+first+" "+last+"</b></a></font></H1>");
         		out.println("<BR></BR>");
-        		out.println("<BR></BR>");
-        		out.println("<HR></HR>");
-        		out.println("<H3><CENTER><font color =Maroon>User Management Module</font></CENTER></H3>");
+        		out.println("<H3><B><font size = 5><font color =Gold>User Management Module</font></B></H3>");
         		
-        		out.println("<CENTER><font color=Teal> Enter user's name to update an account:</font></CENTER>");
+        		out.println("<B><font size = 4><font color=Gold> Enter user's name to update an account:</font></B>");
         		out.println("<FORM NAME='ResetAccountForm' ACTION='ResetAccount.jsp' METHOD='post'>");
-        		out.println("<CENTER><INPUT TYPE='text' NAME='Username' VALUE=''> &nbsp;&nbsp;&nbsp;<INPUT TYPE='submit' NAME='Updateaccount' VALUE='GO'></CENTER>");
-        		out.println("<CENTER><a href ='Adduser.jsp?AddUser=1'><b> Add an user account</b></a></CENTER>");
+        		out.println("<INPUT TYPE='text' NAME='Username' VALUE=''> &nbsp;&nbsp;&nbsp;<INPUT TYPE='submit' NAME='Updateaccount' VALUE='GO'>");
+        		out.println("<a href ='Adduser.jsp?AddUser=1'><b> Add an user account</b></a>");
         		out.println("</FORM>");
         		
-        		out.println("<CENTER><font color =Teal> Manage a Person: </font></CENTER>");
+        		out.println("<BR></BR>");
+        		out.println("<B><font size = 4><font color=Gold>Manage a Person: </font></B>");
 				out.println("<FORM NAME='ManagePersonFrom' ACTION='PersonManage.jsp' METHOD='post'>");
-				out.println("	<CENTER><SELECT NAME='ID'>");
+				out.println("<SELECT NAME='ID'>");
 				sqlStatement="SELECT person_id,first_name,last_name FROM persons";
 				resSet=s.executeQuery(sqlStatement);
 				while(resSet.next()){
 					Integer p_id=resSet.getInt("person_id");
 					String first_n=resSet.getString("first_name");
 					String last_n=resSet.getString("last_name");
-					out.println("<CENTER><OPTION VALUE='"+p_id+"' SELECTED> "+first_n+" "+last_n+" ,ID: "+p_id+"</OPTION><INPUT TYPE='submit' NAME='PersonManage' VALUE='GO'></CENTER>");
+					out.println("<OPTION VALUE='"+p_id+"' SELECTED> "+first_n+" "+last_n+" ,ID: "+p_id+"</OPTION>");
 				}
-				out.println("</SELECT></CENTER>");
-				out.println("<CENTER><a href ='AddPerson.jsp?AddPerson=1'><b>Add a person</b></a></CENTER>");
+				out.println("</SELECT>");
+				out.println("<INPUT TYPE='submit' NAME='PersonManage' VALUE='GO'><a href ='AddPerson.jsp?AddPerson=1'><b>Add a person</b></a>");
 				out.println("</FORM>");
 				
-				
-				out.println("<CENTER><font color =Teal> Manage a Sensor: </font></CENTER>");
+				out.println("<BR></BR>");
+				out.println("<B><font size = 4><font color=Gold> Manage a Sensor: </font></B>");
 				out.println("<FORM NAME='ManagePersonFrom' ACTION='SensorManage.jsp' METHOD='post'>");
-				out.println("	<CENTER><SELECT NAME='ID'>");
+				out.println("<SELECT NAME='ID'>");
 				sqlStatement="SELECT sensor_id, location, sensor_type FROM sensors";
 				resSet=s.executeQuery(sqlStatement);
 				while(resSet.next()){
 					Integer s_id=resSet.getInt("sensor_id");
 					String loc=resSet.getString("location");
 					String s_type=resSet.getString("sensor_type");
-					out.println("<CENTER><OPTION VALUE='"+s_id+"' SELECTED> "+loc+" "+s_type+" ,ID: "+s_id+"</OPTION><INPUT TYPE='submit' NAME='PersonManage' VALUE='GO'></CENTER>");
+					out.println("<OPTION VALUE='"+s_id+"' SELECTED> "+loc+" "+s_type+" ,ID: "+s_id+"</OPTION>");
 				}
-				out.println("</SELECT></CENTER>");
-				out.println("<CENTER><a href ='AddSensor.jsp?AddPerson=1'><b>Add a sensor</b></a></CENTER>");
+				out.println("</SELECT>");
+				out.println("<INPUT TYPE='submit' NAME='PersonManage' VALUE='GO'><a href ='AddSensor.jsp?AddPerson=1'><b>Add a sensor</b></a>");
 				out.println("</FORM>");
+				try{
+					con.close();
+				}
+				catch(Exception e){
+					out.println("<hr>" + e.getMessage() + "<hr>");
+				}
 			}
+			else{
+				response.sendRedirect("Login.html");
+			}
+
 		%>
-	<CENTER>User Documentation:<a href='Documentation.html' target ='_blank'><b>Documentation</b></a></CENTER>
+	<BR></BR>
+	<BR></BR>
+	<BR></BR>
+	User Documentation:<a href='Documentation.html' target ='_blank'><b>Documentation</b></a>
 	</BODY>
 </HTML>
