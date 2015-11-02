@@ -72,15 +72,6 @@
 	<BR></BR>
 	<H3><CENTER><a href="Search.jsp?SearchRequest=1"><b>Search Records</b></a></CENTER></H3>
 	<HR></HR>
-	<CENTER>
-		<a href="Subscribe.jsp?UploadRecord=1"><b>Subscribe Data</b></a>
-	</CENTER>
-	<HR></HR>
-        <HR></HR>
-        <CENTER>
-		<a href="Analysis.jsp?UploadRecord=1"><b>Data Analysis</b></a>
-	</CENTER>
-	<HR></HR>
 	<FORM NAME='ReturnForm' ACTION='UserLogout.jsp' METHOD='get'>
 		<CENTER>
 			<INPUT TYPE='submit' NAME='BACK' VALUE='Log out'>
