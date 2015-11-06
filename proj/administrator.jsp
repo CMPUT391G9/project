@@ -62,8 +62,8 @@
         		out.println("<H3><B><font size = 5><font color =Gold>User Management Module</font></B></H3>");
         		
         		out.println("<B><font size = 4><font color=Gold> Enter user's name to update an account:</font></B>");
-        		out.println("<FORM NAME='ResetAccountForm' ACTION='ResetAccount.jsp' METHOD='post'>");
-        		out.println("<INPUT TYPE='text' NAME='Username' VALUE=''> &nbsp;&nbsp;&nbsp;<INPUT TYPE='submit' NAME='Updateaccount' VALUE='GO'>");
+        		out.println("<FORM NAME='UpdateAccountForm' ACTION='UpdateAccount.jsp' METHOD='post'>");
+        		out.println("<INPUT TYPE='text' NAME='Username' VALUE=''> &nbsp;&nbsp;&nbsp;<INPUT TYPE='submit' NAME='UpdateAccount' VALUE='GO'>");
         		out.println("<a href ='Adduser.jsp?AddUser=1'><b> Add an user account</b></a>");
         		out.println("</FORM>");
         		
