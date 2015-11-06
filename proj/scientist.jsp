@@ -5,7 +5,7 @@
 <BODY background="login.jpg">
 	<%@ page import="java.sql.*"%>
 	<%
-			if(session.getAttribute("class") != null && ((String)session.getAttribute("class")).equals("d")){
+			if(session.getAttribute("role") != null && ((String)session.getAttribute("role")).equals("s")){
 				String userName = (String)session.getAttribute("USERNAME");
 				String oracleId = (String)session.getAttribute("ORACLE_ID");
     			String oraclePassword = (String)session.getAttribute("ORACLE_PASSWORD");
@@ -56,7 +56,12 @@
 	       				first_name=resSet.getString("first_name");
 	       				last_name=resSet.getString("last_name");
 	            	}
+<<<<<<< HEAD
 	        		out.println("<H1><CENTER><font color =Teal>Hello! Scientist: <a href='PersonalManage.jsp?Manage=1'><b>"+first_name+" "+last_name+"</b></a> You can:</font></CENTER></H1>");
+=======
+	        		out.println("<BR></BR><BR></BR><BR></BR><H1><CENTER><font color =Gold>Hello! Scientist: <a href='PersonalInfo.jsp?Manage=1'><b>"+first_name+" "+last_name+"</b></a> </font></CENTER></H1>");
+                               
+>>>>>>> 1dbc5a85906b9f1fba5033fd5d727228ce5a3906
 				}
 				try{
 					con.close();
@@ -71,6 +76,7 @@
 		%>
 	<BR></BR>
 	<H3><CENTER><a href="Search.jsp?SearchRequest=1"><b>Search Records</b></a></CENTER></H3>
+<<<<<<< HEAD
 	<HR></HR>
 	<CENTER>
 		<a href="Subscribe.jsp?UploadRecord=1"><b>Subscribe Data</b></a>
@@ -81,6 +87,18 @@
 		<a href="Analysis.jsp?UploadRecord=1"><b>Data Analysis</b></a>
 	</CENTER>
 	<HR></HR>
+=======
+        <BR></BR>
+	<H3><CENTER>
+		<a href="Subscribe.jsp?UploadRecord=1"><b>Subscribe Data</b></a>
+	</H3></CENTER>
+        <BR></BR>
+        <H3><CENTER>
+		<a href="Analysis.jsp?UploadRecord=1"><b>Data Analysis</b></a>
+	</H3></CENTER>
+        <BR></BR>
+        <BR></BR>
+>>>>>>> 1dbc5a85906b9f1fba5033fd5d727228ce5a3906
 	<FORM NAME='ReturnForm' ACTION='UserLogout.jsp' METHOD='get'>
 		<CENTER>
 			<INPUT TYPE='submit' NAME='BACK' VALUE='Log out'>
