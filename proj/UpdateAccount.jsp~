@@ -39,7 +39,6 @@
 			ResultSet resSet=s.executeQuery(sqlStatement);
 			int cnt=0;
 			while(resSet.next()){
-				user_name=resSet.getString("user_name");
 				password=resSet.getString("password");
 				userRole=resSet.getString("role");
 				cnt++;
@@ -57,18 +56,9 @@
 				out.println("<HR></HR>");
 				out.println("<FORM NAME='AddUserFrom' ACTION='UpdateAccount.jsp' METHOD='post'>");
 				out.println("<TABLE style='margin: 0px auto'>");
-				
-				
 				out.println("<TR>");
-				if(request.getParameter("CommitUpdateAccount") == null){
-					out.println("<B><I><font color=Gold> User Name: </font></I></B>");
-					out.println("<INPUT TYPE='text' NAME='newUsername' VALUE='"+user_name+"'>");
-				}
-				else{
-					String newUsername=request.getParameter("newUsername").trim();
-					out.println("<B><I><font color=Gold> User Name: </font></I></B>");
-					out.println("<INPUT TYPE='text' NAME='newUsername' VALUE='"+newUsername+"'>");
-				}
+				out.println("<B><I><font color=Gold> User Name: </font></I></B>");
+				out.println(""+user_name+"");
 				out.println("</TR>");
 				
 				out.println("<TR>");
@@ -78,30 +68,19 @@
 				}
 				else{
 					String newPassword=request.getParameter("newPassword").trim();
-					out.println("<B><I><font color=Gold> Password: </font></I></B>");
-					out.println("<INPUT TYPE='text' NAME='newPassword' VALUE='"+newPassword+"'>");
+					out.println("<TD><B><I><font color=Gold> Password: </font></I></B>");
+					out.println("<TD><INPUT TYPE='text' NAME='newPassword' VALUE='"+newPassword+"'>");
 				}
 				out.println("</TR>");
-				
-				
 				out.println("<TR>");
-				if(request.getParameter("CommitUpdateAccount") == null){
-					out.println("<B><I><font color=Gold> User Roles(type in one of a,d,s)*: </font></I></B>");
-					out.println("<INPUT TYPE='text' NAME='newRole' VALUE='"+userRole+"'>");
-				}
-				else{
-					String newRole=request.getParameter("newRole").trim();
-					out.println("<B><I><font color=Gold> Password: </font></I></B>");
-					out.println("<INPUT TYPE='text' NAME='newRole' VALUE='"+newRole+"'>");
-				}
+				out.println("<B><I><font color=Gold> User Roles(type in one of a,d,s)*: </font></I></B>");
+				out.println(""+userRole+"");
 				out.println("</TR>");
-				
-				
 				out.println("</TABLE>");
 				out.println("*a for Admininstrator, d for Data Curator, s for Scientist");
-				
+				out.println("<HR></HR>");
 				out.println("<INPUT TYPE='hidden' NAME='UserName' VALUE='"+user_name+"'>");
-				out.println("<p><INPUT TYPE='submit' NAME='CommitUpdateAccount' VALUE='OK'></p>");
+				out.println("<INPUT TYPE='submit' NAME='CommitUpdateAccount' VALUE='OK'>");
 				
 			}
 			if(request.getParameter("CommitUpdateAccount")!=null){
@@ -135,4 +114,3 @@
 	%>
 </BODY>
 </HTML>
-
