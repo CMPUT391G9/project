@@ -6,7 +6,7 @@
 	<%@ page import="java.sql.*"%>
 	<%
 	if((request.getParameter("UpdateAccount")!=null 
-	|| request.getParameter("UpdateAccountComm")!=null )
+	|| request.getParameter("CommitUpdateAccount")!=null )
 	&& ((String)session.getAttribute("role"))!=null){
 		String oracleId = (String)session.getAttribute("ORACLE_ID");
 		String oraclePassword = (String)session.getAttribute("ORACLE_PASSWORD");
@@ -60,7 +60,7 @@
 				
 				
 				out.println("<TR>");
-				if(request.getParameter("UpdateAccountComm") == null){
+				if(request.getParameter("CommitUpdateAccount") == null){
 					out.println("<B><I><font color=Gold> User Name: </font></I></B>");
 					out.println("<INPUT TYPE='text' NAME='newUsername' VALUE='"+user_name+"'>");
 				}
@@ -72,7 +72,7 @@
 				out.println("</TR>");
 				
 				out.println("<TR>");
-				if(request.getParameter("UpdateAccountComm") == null){
+				if(request.getParameter("CommitUpdateAccount") == null){
 					out.println("<B><I><font color=Gold> Password: </font></I></B>");
 					out.println("<INPUT TYPE='text' NAME='newPassword' VALUE='"+password+"'>");
 				}
@@ -85,7 +85,7 @@
 				
 				
 				out.println("<TR>");
-				if(request.getParameter("UpdateAccountComm") == null){
+				if(request.getParameter("CommitUpdateAccount") == null){
 					out.println("<B><I><font color=Gold> User Roles(type in one of a,d,s)*: </font></I></B>");
 					out.println("<INPUT TYPE='text' NAME='newRole' VALUE='"+userRole+"'>");
 				}
@@ -101,11 +101,13 @@
 				out.println("<CENTER><font color = GOld> (a for Admininstrator, d for Data Curator, s for Scientist)</CENTER>");
 				
 				out.println("<INPUT TYPE='hidden' NAME='Username' VALUE='"+user_name+"'>");
-				out.println("<CENTER><p><INPUT TYPE='submit' NAME='UpdateAccountComm' VALUE='Update'></p></CENTER>");
+				out.println("<CENTER><p><INPUT TYPE='submit' NAME='CommitUpdateAccount' VALUE='Update'></p></CENTER>");
 				
 			}
-			if(request.getParameter("UpdateAccountComm")!=null){
+			if(request.getParameter("CommitUpdateAccount")!=null){
 				String newPassword=request.getParameter("newPassword").trim();
+				String newUsername=request.getParameter("newUsername").trim();
+				String newRole=request.getParameter("newRole").trim();
 					
 				Statement s1=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 				String sqlStatement1="SELECT user_name,password,role FROM users WHERE user_name='"+user_name+"' FOR UPDATE";
@@ -116,7 +118,37 @@
 						resSet1.updateRow();
 					}
 					s1.executeUpdate("commit");
-					out.println("Change password successfully! New Password is: "+newPassword+"");
+					out.println("<CENTER>Change Password successfully! New password is: "+newPassword+"</CENTER>");
+				}
+				catch(Exception e){
+					
+				}
+				
+				Statement s2=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+				String sqlStatement2="SELECT user_name,password,role FROM users WHERE user_name='"+user_name+"' FOR UPDATE";
+				ResultSet resSet2=s2.executeQuery(sqlStatement1);
+				try{
+					while(resSet2.next()){
+						resSet2.updateString("user_name",newUsername);
+						resSet2.updateRow();
+					}
+					s2.executeUpdate("commit");
+					out.println("<CENTER>Change Username successfully! New password is: "+newUsername+"</CENTER>");
+				}
+				catch(Exception e){
+					
+				}
+				
+				Statement s3=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+				String sqlStatement3="SELECT user_name,password,role FROM users WHERE user_name='"+user_name+"' FOR UPDATE";
+				ResultSet resSet3=s3.executeQuery(sqlStatement1);
+				try{
+					while(resSet3.next()){
+						resSet3.updateString("role",newRole);
+						resSet3.updateRow();
+					}
+					s3.executeUpdate("commit");
+					out.println("<CENTER>Change Role successfully! New role is: "+newRole+"</CENTER>");
 				}
 				catch(Exception e){
 					
