@@ -26,7 +26,7 @@
 <h3><p>Afterimages are chosen, click the "<u><b>UploadPic<b></u>" button to upload the images to the system database.<h3><p>
 </div>
 	<FORM NAME='backForm' ACTION='Documentation.html' METHOD='post'>
-	<INPUT TYPE='submit' NAME='Back' VALUE='RETURN'>
+	<INPUT TYPE='submit' NAME='Back' VALUE='Back'>
 	</FORM>
 </body>
 
