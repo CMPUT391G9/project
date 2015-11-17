@@ -6,7 +6,7 @@
 	<%@ page import="java.sql.*"%>
 	<%
 	if((request.getParameter("UpdateAccount")!=null 
-	|| request.getParameter("CommitUpdateAccount")!=null )
+	|| request.getParameter("UpdateAccountComm")!=null )
 	&& ((String)session.getAttribute("role"))!=null){
 		String oracleId = (String)session.getAttribute("ORACLE_ID");
 		String oraclePassword = (String)session.getAttribute("ORACLE_PASSWORD");
@@ -24,9 +24,9 @@
 			canConnect = false;
 			out.println("<p><b>Unable to Connect Oracle DB!</b></p>");
 			out.println("<p><b>Invalid UserName or Password!</b></p>");
-			out.println("<p><b>Press RETURN to the previous page.</b></p>");
+			out.println("<p><b>Press Return to the previous page.</b></p>");
 			out.println("<FORM NAME='ConnectFailForm' ACTION='Connector.html' METHOD='get'>");
-			out.println("<INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='RETURN'>");
+			out.println("<INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='Return'>");
 			out.println("</FORM>");
     	}
 		if(canConnect){
@@ -34,8 +34,8 @@
 			Statement s=con.createStatement();
 			String sqlStatement="SELECT * FROM users WHERE user_name='"+user_name+"'";
 			String password = null; 
-			String userRole=null; 
- 			Integer person_id=null;
+			String userRole = null; 
+ 			Integer person_id = null;
 			ResultSet resSet=s.executeQuery(sqlStatement);
 			int cnt=0;
 			while(resSet.next()){
@@ -47,9 +47,9 @@
 			if(cnt==0){
 				out.println("<p><b>No such an Account</b></p>");
 				out.println("<p><b>Invalid UserName!</b></p>");
-				out.println("<p><b>Press RETURN to the previous page.</b></p>");
+				out.println("<p><b>Press Return to the previous page.</b></p>");
 				out.println("<FORM NAME='AbortForm' ACTION='administrator.jsp' METHOD='get'>");
-				out.println("<INPUT TYPE='submit' NAME='RETURN' VALUE='RETURN'>");
+				out.println("<CENTER><INPUT TYPE='submit' NAME='RETURN' VALUE='Return'></CNETER>");
 				out.println("</FORM>");
 			}
 			else{
@@ -60,7 +60,7 @@
 				
 				
 				out.println("<TR>");
-				if(request.getParameter("CommitUpdateAccount") == null){
+				if(request.getParameter("UpdateAccountComm") == null){
 					out.println("<B><I><font color=Gold> User Name: </font></I></B>");
 					out.println("<INPUT TYPE='text' NAME='newUsername' VALUE='"+user_name+"'>");
 				}
@@ -72,7 +72,7 @@
 				out.println("</TR>");
 				
 				out.println("<TR>");
-				if(request.getParameter("CommitUpdateAccount") == null){
+				if(request.getParameter("UpdateAccountComm") == null){
 					out.println("<B><I><font color=Gold> Password: </font></I></B>");
 					out.println("<INPUT TYPE='text' NAME='newPassword' VALUE='"+password+"'>");
 				}
@@ -85,7 +85,7 @@
 				
 				
 				out.println("<TR>");
-				if(request.getParameter("CommitUpdateAccount") == null){
+				if(request.getParameter("UpdateAccountComm") == null){
 					out.println("<B><I><font color=Gold> User Roles(type in one of a,d,s)*: </font></I></B>");
 					out.println("<INPUT TYPE='text' NAME='newRole' VALUE='"+userRole+"'>");
 				}
@@ -98,13 +98,13 @@
 				
 				
 				out.println("</TABLE>");
-				out.println("*a for Admininstrator, d for Data Curator, s for Scientist");
+				out.println("<CENTER><font color = GOld> (a for Admininstrator, d for Data Curator, s for Scientist)</CENTER>");
 				
-				out.println("<INPUT TYPE='hidden' NAME='UserName' VALUE='"+user_name+"'>");
-				out.println("<p><INPUT TYPE='submit' NAME='CommitUpdateAccount' VALUE='OK'></p>");
+				out.println("<INPUT TYPE='hidden' NAME='Username' VALUE='"+user_name+"'>");
+				out.println("<CENTER><p><INPUT TYPE='submit' NAME='UpdateAccountComm' VALUE='Update'></p></CENTER>");
 				
 			}
-			if(request.getParameter("CommitUpdateAccount")!=null){
+			if(request.getParameter("UpdateAccountComm")!=null){
 				String newPassword=request.getParameter("newPassword").trim();
 					
 				Statement s1=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
@@ -124,7 +124,7 @@
 			}
 			out.println("</FORM>");
 			out.println("<FORM NAME='CancelForm' ACTION='administrator.jsp' METHOD='get'>");
-			out.println("<INPUT TYPE='submit' NAME='cancel' VALUE='CANCEL'>");
+			out.println("<CENTER><INPUT TYPE='submit' NAME='cancel' VALUE='Cancel'></CENTER>");
 			out.println("</FORM>");
 			con.close();
 		}

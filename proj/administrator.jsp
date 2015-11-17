@@ -61,14 +61,14 @@
         		out.println("<BR></BR>");
         		out.println("<H3><B><font size = 5><font color =Gold>User Management Module</font></B></H3>");
         		
-        		out.println("<B><font size = 4><font color=Gold> Enter user's name to update an account:</font></B>");
+        		out.println("<B><font size = 4><font color=Gold> Enter user name to update:</font></B>");
         		out.println("<FORM NAME='UpdateAccountForm' ACTION='UpdateAccount.jsp' METHOD='post'>");
-        		out.println("<INPUT TYPE='text' NAME='Username' VALUE=''> &nbsp;&nbsp;&nbsp;<INPUT TYPE='submit' NAME='UpdateAccount' VALUE='GO'>");
-        		out.println("<a href ='Adduser.jsp?AddUser=1'><b> Add an user account</b></a>");
+        		out.println("<INPUT TYPE='text' NAME='Username' VALUE=''> <INPUT TYPE='submit' NAME='UpdateAccount' VALUE='GO'>");
+        		out.println("<a href ='AddUser.jsp?AddUser=1'><b> Add User</b></a>");
         		out.println("</FORM>");
         		
         		out.println("<BR></BR>");
-        		out.println("<B><font size = 4><font color=Gold>Manage a Person: </font></B>");
+        		out.println("<B><font size = 4><font color=Gold>Manage Person: </font></B>");
 				out.println("<FORM NAME='ManagePersonFrom' ACTION='PersonManage.jsp' METHOD='post'>");
 				out.println("<SELECT NAME='ID'>");
 				sqlStatement="SELECT person_id,first_name,last_name FROM persons";
@@ -80,11 +80,11 @@
 					out.println("<OPTION VALUE='"+p_id+"' SELECTED> "+first_n+" "+last_n+" ,ID: "+p_id+"</OPTION>");
 				}
 				out.println("</SELECT>");
-				out.println("<INPUT TYPE='submit' NAME='PersonManage' VALUE='GO'><a href ='AddPerson.jsp?AddPerson=1'><b>Add a person</b></a>");
+				out.println("<INPUT TYPE='submit' NAME='ManagePerson' VALUE='GO'><a href ='AddPerson.jsp?AddPerson=1'><b>Add a person</b></a>");
 				out.println("</FORM>");
 				
 				out.println("<BR></BR>");
-				out.println("<B><font size = 4><font color=Gold> Manage a Sensor: </font></B>");
+				out.println("<B><font size = 4><font color=Gold> Manage Sensor: </font></B>");
 				out.println("<FORM NAME='ManagePersonFrom' ACTION='SensorManage.jsp' METHOD='post'>");
 				out.println("<SELECT NAME='ID'>");
 				sqlStatement="SELECT sensor_id, location, sensor_type FROM sensors";
