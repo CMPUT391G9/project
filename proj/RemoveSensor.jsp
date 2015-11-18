@@ -5,7 +5,7 @@
 <BODY background="login.jpg">
 	<%@ page import="java.sql.*"%>
 	<%
-	if(request.getParameter("ManageSensor") != null && ((String)session.getAttribute("role"))!=null){
+	if(request.getParameter("RemoveSensor") != null && ((String)session.getAttribute("role"))!=null){
 		String oracleId = (String)session.getAttribute("ORACLE_ID");
 		String oraclePassword = (String)session.getAttribute("ORACLE_PASSWORD");
 

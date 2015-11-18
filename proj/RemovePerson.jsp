@@ -5,7 +5,7 @@
 <BODY background="login.jpg">
 	<%@ page import="java.sql.*"%>
 	<%
-	if(request.getParameter("ManagePerson") != null && ((String)session.getAttribute("role"))!=null){
+	if(request.getParameter("RemovePerson") != null && ((String)session.getAttribute("role"))!=null){
 		String oracleId = (String)session.getAttribute("ORACLE_ID");
 		String oraclePassword = (String)session.getAttribute("ORACLE_PASSWORD");
 
@@ -50,11 +50,11 @@
 			}
 			out.println("<H1><CENTER><font color =Gold>"+first_name+" "+last_name+"'s information:</font></CENTER></H1>");
 			out.println("<HR></HR>");
-			out.println("<FORM NAME='UpdatePersonForm' ACTION='UpdatePersonComm.jsp' METHOD='post'>");
+			out.println("<FORM NAME='RemovePersonForm' ACTION='RemovePersonComm.jsp' METHOD='post'>");
 			out.println("	<TABLE style='margin: 0px auto'>");
 			out.println("		<TR>");
-			out.println("			<B><I><font color=Gold> First Name: </font></I></B>");
-			out.println("			<INPUT TYPE='text' NAME='newFirstName' VALUE='"+first_name+"'>");
+			out.println("			<B><I><font color=Gold> First Name: "+first_name+"</font></I></B>");
+	
 			out.println("		</TR>");
 			out.println("		<TR>");
 			out.println("			<B><I><font color=Gold>Last Name: </font></I></B>");

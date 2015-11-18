@@ -156,7 +156,7 @@
 			}
 			out.println("</FORM>");
 			out.println("<FORM NAME='CancelForm' ACTION='administrator.jsp' METHOD='get'>");
-			out.println("<CENTER><INPUT TYPE='submit' NAME='cancel' VALUE='Cancel'></CENTER>");
+			out.println("<CENTER><INPUT TYPE='submit' NAME='cancel' VALUE='Back'></CENTER>");
 			out.println("</FORM>");
 			con.close();
 		}

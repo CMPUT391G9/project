@@ -66,7 +66,7 @@
 				out.println("		</TR>");
 				out.println("	</TABLE>");
 
-				out.println("   <CENTER><INPUT TYPE='submit' NAME='CommitAddUser' VALUE='Add'></CENTER>");
+				out.println("   <CENTER><INPUT TYPE='submit' NAME='AddUserComm' VALUE='Add'></CENTER>");
 				out.println("</FORM>");
 				con.close();
 				

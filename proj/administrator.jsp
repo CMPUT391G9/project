@@ -80,23 +80,28 @@
 					out.println("<OPTION VALUE='"+p_id+"' SELECTED> "+first_n+" "+last_n+" ,ID: "+p_id+"</OPTION>");
 				}
 				out.println("</SELECT>");
-				out.println("<INPUT TYPE='submit' NAME='ManagePerson' VALUE='GO'><a href ='AddPerson.jsp?AddPerson=1'><b>Add a person</b></a>");
+				out.println("<INPUT TYPE='submit' NAME='ManagePerson' VALUE='GO'> <a href ='AddPerson.jsp?AddPerson=1'><b>Add</b></a> ");
+				out.println("<a href ='RemovePerson.jsp?RemovePerson=1'><b>Remove</b></a>");
 				out.println("</FORM>");
+				
 				
 				out.println("<BR></BR>");
 				out.println("<B><font size = 4><font color=Gold> Manage Sensor: </font></B>");
 				out.println("<FORM NAME='ManagePersonFrom' ACTION='SensorManage.jsp' METHOD='post'>");
 				out.println("<SELECT NAME='ID'>");
-				sqlStatement="SELECT sensor_id, location, sensor_type FROM sensors";
+				sqlStatement="SELECT sensor_id, location, sensor_type, description FROM sensors";
 				resSet=s.executeQuery(sqlStatement);
 				while(resSet.next()){
 					Integer s_id=resSet.getInt("sensor_id");
 					String loc=resSet.getString("location");
 					String s_type=resSet.getString("sensor_type");
-					out.println("<OPTION VALUE='"+s_id+"' SELECTED> "+loc+" "+s_type+" ,ID: "+s_id+"</OPTION>");
+					String s_des=resSet.getString("description");
+					
+					out.println("<OPTION VALUE='"+s_id+"' SELECTED> "+loc+" "+s_type+","+s_id+"</OPTION>");
 				}
 				out.println("</SELECT>");
-				out.println("<INPUT TYPE='submit' NAME='PersonManage' VALUE='GO'><a href ='AddSensor.jsp?AddPerson=1'><b>Add a sensor</b></a>");
+				out.println("<INPUT TYPE='submit' NAME='ManageSensor' VALUE='GO'> <a href ='AddSensor.jsp?AddSensor=1'><b>Add</b></a>");
+				out.println("<a href ='RemoveSensor.jsp?RemoveSensor=1'><b>Remove</b></a>");
 				out.println("</FORM>");
 				try{
 					con.close();
