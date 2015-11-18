@@ -3,7 +3,7 @@
 <TITLE>Data Curator Home Page</TITLE>
 </HEAD>
 <BODY background="login.jpg">
-	<%@ page import="java.sql.*"%>
+        <%@ page import="java.sql.*"%>
 	<%
                        
 		if(session.getAttribute("role") != null && ((String)session.getAttribute("role")).equals("d")){
@@ -14,20 +14,22 @@
 		   	String driverName = "oracle.jdbc.driver.OracleDriver";
 			String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 			Boolean canConnect = true;
-			try{
-        		Class drvClass = Class.forName(driverName);
+			
+                        try{
+        		        Class drvClass = Class.forName(driverName);
 				DriverManager.registerDriver((Driver)drvClass.newInstance());
-        		con = DriverManager.getConnection(dbstring,oracleId,oraclePassword);
-         		con.setAutoCommit(false);
+        		        con = DriverManager.getConnection(dbstring,oracleId,oraclePassword);
+         		        con.setAutoCommit(false);
         		}
+
         		catch(Exception e){
         			canConnect = false;
         			out.println("<p><b>Unable to Connect Oracle DB!</b></p>");
         			out.println("<p><b>Invalid UserName or Password!</b></p>");
         			out.println("<p><b>Press RETURN to the previous page.</b></p>");
-            		out.println("<FORM NAME='ConnectFailForm' ACTION='Connector.html' METHOD='get'>");
-            		out.println("    <CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='RETURN'></CENTER>");
-            		out.println("</FORM>");
+            		        out.println("<FORM NAME='ConnectFailForm' ACTION='Connector.html' METHOD='get'>");
+            		        out.println("    <CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='RETURN'></CENTER>");
+            		        out.println("</FORM>");
         		}
 
 				Statement s=con.createStatement();

@@ -111,7 +111,7 @@
 			    	}
 			    }
 			    con.close();
-			    response.sendRedirect("RadPage.jsp");
+			    response.sendRedirect("datacurator.jsp");
 			}
     %>
 </BODY>
