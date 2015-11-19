@@ -57,43 +57,47 @@
 				
 				String role=null;
 				if(userRole.equals("a")){
-					response.sendRedirect("administrator.jsp"); 
+					role="Administrator";; 
 				}
 				else if(userRole.equals("d")){
-					response.sendRedirect("datacurator.jsp"); 
+					role="Data Accurtor"; 
 				}
 				else if(userRole.equals("s")){
-					response.sendRedirect("scientist.jsp");
+					role="Scientist";
 				}
 				
-				out.println("<H1><CENTER><font color =Teal>"+role+": "+first_name+" "+last_name+" ("+userName+") 's profile:</font></CENTER></H1>");
+				out.println("<H1><CENTER><font color =Gold>"+role+": "+first_name+" "+last_name+" ("+userName+") 's profile:</font></CENTER></H1>");
 				out.println("<HR></HR>");
-				out.println("<FORM NAME='ChangeProfileForm' ACTION='ChangeProfileProcess.jsp' METHOD='post'>");
+				out.println("<FORM NAME='ChangeProfileForm' ACTION='PersonalInfoComm.jsp' METHOD='post'>");
 				out.println("	<TABLE style='margin: 0px auto'>");
 				out.println("		<TR>");
-				out.println("			<TD><B><I><font color=Maroon> First Name: </font></I></B></TD>");
-				out.println("			<TD><INPUT TYPE='text' NAME='newFirstName' VALUE='"+first_name+"'></TD>");
+				out.println("			<B><I><font color=Gold> First Name: </font></I></B>");
+				out.println("			<INPUT TYPE='text' NAME='newFirstName' VALUE='"+first_name+"'>");
 				out.println("		</TR>");
+				out.println("		<BR></BR>");
 				out.println("		<TR>");
-				out.println("			<TD><B><I><font color=Maroon>Last Name: </font></I></B></TD>");
-				out.println("			<TD><INPUT TYPE='text' NAME='newLastName' VALUE='"+last_name+"'></TD>");
+				out.println("			<B><I><font color=Gold>Last Name: </font></I></B>");
+				out.println("			<INPUT TYPE='text' NAME='newLastName' VALUE='"+last_name+"'>");
 				out.println("		</TR>");
+				out.println("		<BR></BR>");
 				out.println("		<TR>");
-				out.println("			<TD><B><I><font color=Maroon>Address: </font></I></B></TD>");
-				out.println("			<TD><INPUT TYPE='text' NAME='newAddress' VALUE='"+address+"'></TD>");
+				out.println("			<B><I><font color=Gold>Address: </font></I></B>");
+				out.println("			<INPUT TYPE='text' NAME='newAddress' VALUE='"+address+"'>");
 				out.println("		</TR>");
+				out.println("		<BR></BR>");
 				out.println("		<TR>");
-				out.println("			<TD><B><I><font color=Maroon>Email: </font></I></B></TD>");
-				out.println("			<TD><INPUT TYPE='text' NAME='newEmail' VALUE='"+email+"'></TD>");
+				out.println("			<B><I><font color=Gold>Email: </font></I></B>");
+				out.println("			<INPUT TYPE='text' NAME='newEmail' VALUE='"+email+"'>");
 				out.println("		</TR>");
+				out.println("		<BR></BR>");
 				out.println("		<TR>");
-				out.println("			<TD><B><I><font color=Maroon>Phone: </font></I></B></TD>");
-				out.println("			<TD><INPUT TYPE='text' NAME='newPhone' VALUE='"+phone+"'></TD>");
+				out.println("			<B><I><font color=Gold>Phone: </font></I></B>");
+				out.println("			<INPUT TYPE='text' NAME='newPhone' VALUE='"+phone+"'>");
 				out.println("		</TR>");
-				out.println("       <HR></HR>");
+				out.println("		<BR></BR>");
 				out.println("		<TR>");
-				out.println("			<TD><B><I><font color=Maroon>Password: </font></I></B></TD>");
-				out.println("			<TD><INPUT TYPE='password' NAME='newPassword' VALUE='"+password+"'></TD>");
+				out.println("			<B><I><font color=Gold>Password: </font></I></B>");
+				out.println("			<INPUT TYPE='password' NAME='newPassword' VALUE='"+password+"'>");
 				out.println("		</TR>");
 				out.println("	</TABLE>");
 				out.println("   <HR></HR>");
@@ -106,7 +110,7 @@
 				out.println("<INPUT TYPE='hidden' NAME='oldPassword' VALUE='"+password+"'>");
 				out.println("<INPUT TYPE='hidden' NAME='person_id' VALUE='"+personId+"'>");
 				
-				out.println("   <CENTER><INPUT TYPE='submit' NAME='UPDATE' VALUE='UPDATE'></CENTER>");
+				out.println("<CENTER><INPUT TYPE='submit' NAME='UPDATE' VALUE='Update'></CENTER>");
 				out.println("</FORM>");
 			}
 			try{
@@ -120,22 +124,22 @@
 			out.println("<p><b>You have no right to use this module</b></p>");
 			out.println("<p><b>Press RETURN to the login page.</b></p>");
 			out.println("<FORM NAME='NotAllowFrom' ACTION='Login.html' METHOD='get'>");
-			out.println("    <CENTER><INPUT TYPE='submit' NAME='NOT_ALLOW' VALUE='RETURN'></CENTER>");
+			out.println("    <CENTER><INPUT TYPE='submit' NAME='NOT_ALLOW' VALUE='Return'></CENTER>");
 			out.println("</FORM>");
 		}
 	%>
 	<%
-		String userClass=(String)session.getAttribute("class");
-		if(userClass.equals("a")){
-			out.println("<FORM NAME='backForm' ACTION='AdminPage.jsp' METHOD='post' >");
+		String userRole=(String)session.getAttribute("role");
+		if(userRole.equals("a")){
+			out.println("<FORM NAME='backForm' ACTION='administrator.jsp' METHOD='post' >");
 		}
-		else if(userClass.equals("d")){
+		else if(userRole.equals("d")){
 			out.println("<FORM NAME='backForm' ACTION='datacurator.jsp' METHOD='post' >");
 		}
-		else if(userClass.equals("s")){
+		else if(userRole.equals("s")){
 			out.println("<FORM NAME='backForm' ACTION='scientist.jsp' METHOD='post' >");
 		}
-		out.println("<CENTER><INPUT TYPE='submit' NAME='Back' VALUE='RETURN'></CENTER>");
+		out.println("<CENTER><INPUT TYPE='submit' NAME='Back' VALUE='Back'></CENTER>");
 		out.println("</FORM>");
 	%>
 </BODY>

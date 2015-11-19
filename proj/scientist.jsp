@@ -75,7 +75,7 @@
 	</H3></CENTER>
         <BR></BR>
         <BR></BR>
-	<FORM NAME='ReturnForm' ACTION='UserLogout.jsp' METHOD='get'>
+	<FORM NAME='ReturnForm' ACTION='logout.jsp' METHOD='get'>
 		<CENTER>
 			<INPUT TYPE='submit' NAME='BACK' VALUE='Log out'>
 		</CENTER>

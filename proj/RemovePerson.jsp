@@ -2,97 +2,52 @@
 <HEAD>
 <TITLE>Manage Page</TITLE>
 </HEAD>
-<BODY background="login.jpg">
+<BODY>
 	<%@ page import="java.sql.*"%>
 	<%
-	if(request.getParameter("RemovePerson") != null && ((String)session.getAttribute("role"))!=null){
+	if(request.getParameter("Remove") != null){
 		String oracleId = (String)session.getAttribute("ORACLE_ID");
 		String oraclePassword = (String)session.getAttribute("ORACLE_PASSWORD");
-
 		Connection con = null;
 		String driverName = "oracle.jdbc.driver.OracleDriver";
 		String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 		Boolean canConnect = true;
-		
 		try{
 			Class drvClass = Class.forName(driverName);
 			DriverManager.registerDriver((Driver)drvClass.newInstance());
 			con = DriverManager.getConnection(dbstring,oracleId,oraclePassword);
-			con.setAutoCommit(false);
+			con.setAutoCommit(true);
 		}
 		catch(Exception e){
 			canConnect = false;
 			out.println("<p><b>Unable to Connect Oracle DB!</b></p>");
 			out.println("<p><b>Invalid UserName or Password!</b></p>");
-			out.println("<p><b>Press Return to the previous page.</b></p>");
+			out.println("<p><b>Press RETURN to the previous page.</b></p>");
 			out.println("<FORM NAME='ConnectFailForm' ACTION='Connector.html' METHOD='get'>");
-			out.println("    <CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='Return'></CENTER>");
+			out.println("    <CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='RETURN'></CENTER>");
 			out.println("</FORM>");
     	}
 		if(canConnect){
-			Statement s=con.createStatement();
-			String sqlStatement=null;
-			String person_id=request.getParameter("ID").trim();
-			ResultSet resSet=null;
-			sqlStatement = "SELECT * FROM persons WHERE person_id="+person_id;
-			resSet = s.executeQuery(sqlStatement);
-			String first_name = null;
-			String last_name=null;
-			String address=null;
-			String email=null;
-			String phone=null;
-			while(resSet != null && resSet.next()){
-				first_name=resSet.getString("first_name");
-				last_name=resSet.getString("last_name");
-				address=resSet.getString("address");
-				email=resSet.getString("email");
-				phone=resSet.getString("phone");
+			boolean abort=false;
+			String person_id=request.getParameter("person_id").trim();
+			try{
+				String sqlStatement="DELETE from persons where person_id = person_is"+person_id;
+				if(abort==false){
+					con.close();
+					response.sendRedirect("administrator.jsp"); 
+				}
 			}
-			out.println("<H1><CENTER><font color =Gold>"+first_name+" "+last_name+"'s information:</font></CENTER></H1>");
-			out.println("<HR></HR>");
-			out.println("<FORM NAME='RemovePersonForm' ACTION='RemovePersonComm.jsp' METHOD='post'>");
-			out.println("	<TABLE style='margin: 0px auto'>");
-			out.println("		<TR>");
-			out.println("			<B><I><font color=Gold> First Name: "+first_name+"</font></I></B>");
-	
-			out.println("		</TR>");
-			out.println("		<TR>");
-			out.println("			<B><I><font color=Gold>Last Name: </font></I></B>");
-			out.println("			<INPUT TYPE='text' NAME='newLastName' VALUE='"+last_name+"'>");
-			out.println("		</TR>");
-			out.println("		<TR>");
-			out.println("			<B><I><font color=Gold>Address: </font></I></B>");
-			out.println("			<INPUT TYPE='text' NAME='newAddress' VALUE='"+address+"'>");
-			out.println("		</TR>");
-			out.println("		<TR>");
-			out.println("			<B><I><font color=Gold>Email: </font></I></B>");
-			out.println("			<INPUT TYPE='text' NAME='newEmail' VALUE='"+email+"'>");
-			out.println("		</TR>");
-			out.println("		<TR>");
-			out.println("			<B><I><font color=Gold>Phone: </font></I></B>");
-			out.println("			<INPUT TYPE='text' NAME='newPhone' VALUE='"+phone+"'>");
-			out.println("		</TR>");
-			
-			out.println("	</TABLE>");
-			out.println("   <HR></HR>");
-			
-			out.println("<INPUT TYPE='hidden' NAME='person_id' VALUE='"+person_id+"'>");
-			out.println("<INPUT TYPE='hidden' NAME='oldFirstName' VALUE='"+first_name+"'>");
-			out.println("<INPUT TYPE='hidden' NAME='oldLastName' VALUE='"+last_name+"'>");
-			out.println("<INPUT TYPE='hidden' NAME='oldAddress' VALUE='"+address+"'>");
-			out.println("<INPUT TYPE='hidden' NAME='oldEmail' VALUE='"+email+"'>");
-			out.println("<INPUT TYPE='hidden' NAME='oldPhone' VALUE='"+phone+"'>");
-			
-			out.println("<CENTER><INPUT TYPE='submit' NAME='UPDATE' VALUE='Update'></CENTER>");
-			out.println("</FORM>");
-			out.println("<FORM NAME='CancelForm' ACTION='administrator.jsp' METHOD='get'>");
-			out.println("<Center><INPUT TYPE='submit' NAME='cancel' VALUE='Back'></Center>");
-			out.println("</FORM>");
-			con.close();
+			catch(Exception e){
+				out.println("<HR><CENTER>"+e.getMessage()+"<CENTER></HR>");
+				out.println("<FORM NAME='AbortForm' ACTION='administrator.jsp' METHOD='get'>");
+				out.println("<INPUT TYPE='hidden' NAME='ID' VALUE='"+person_id+"'>");
+				out.println("    <CENTER><INPUT TYPE='submit' NAME='Return' VALUE='Return'></CENTER>");
+				out.println("</FORM>");
+				if(con!=null){
+					con.close();
+				}
+			}
 		}
-	}
-	else{
-		response.sendRedirect("Login.html");
 	}
 	%>
 </BODY>

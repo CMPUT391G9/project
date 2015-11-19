@@ -81,7 +81,7 @@
 				}
 				out.println("</SELECT>");
 				out.println("<INPUT TYPE='submit' NAME='ManagePerson' VALUE='GO'> <a href ='AddPerson.jsp?AddPerson=1'><b>Add</b></a> ");
-				out.println("<a href ='RemovePerson.jsp?RemovePerson=1'><b>Remove</b></a>");
+				out.println("<a href ='RemovePerson.jsp?Remove=1'><b>Remove</b></a>");
 				out.println("</FORM>");
 				
 				
@@ -118,6 +118,11 @@
 	<BR></BR>
 	<BR></BR>
 	<BR></BR>
+	<FORM NAME='ReturnForm' ACTION='logout.jsp' METHOD='get'>
+		<CENTER>
+			<INPUT TYPE='submit' NAME='BACK' VALUE='Log out'>
+		</CENTER>
+	</FORM>
 	User Documentation:<a href='Documentation.html' target ='_blank'><b>Documentation</b></a>
 	</BODY>
 </HTML>
