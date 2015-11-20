@@ -22,11 +22,11 @@
      				con.setAutoCommit(false);
     			}
     			catch(Exception e){
-    				out.println("<p><b>Unable to Connect Oracle DB!</b></p>");
-    				out.println("<p><b>Invalid UserName or Password!</b></p>");
-    				out.println("<p><b>Press RETURN to the previous page.</b></p>");
+    				out.println("<CENTER><font color=Gold><p><b>Unable to Connect Oracle DB!</b></p></CENTER>");
+    				out.println("<CENTER><font color=Gold><p><b>Invalid UserName or Password!</b></p></CENTER>");
+    				out.println("<CENTER><font color=Gold><p><b>Press RETURN to the previous page.</b></p></CENTER>");
         			out.println("<FORM NAME='ConnectFailForm' ACTION='Connector.html' METHOD='get'>");
-        			out.println("    <CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='RETURN'></CENTER>");
+        			out.println("<CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='Return'></CENTER>");
         			out.println("</FORM>");
     			}
 
@@ -63,8 +63,8 @@
         		
         		out.println("<B><font size = 4><font color=Gold> Enter user name to update:</font></B>");
         		out.println("<FORM NAME='UpdateAccountForm' ACTION='UpdateAccount.jsp' METHOD='post'>");
-        		out.println("<INPUT TYPE='text' NAME='Username' VALUE=''> <INPUT TYPE='submit' NAME='UpdateAccount' VALUE='GO'>");
-        		out.println("<a href ='AddUser.jsp?AddUser=1'><b> Add User</b></a>");
+        		out.println("<INPUT TYPE='text' NAME='Username' VALUE=''> <INPUT TYPE='submit' NAME='UpdateAccount' VALUE='Manage'>");
+        		out.println("<a href ='AddUser.jsp?AddUser=1'><b> Add</b></a>");
         		out.println("</FORM>");
         		
         		out.println("<BR></BR>");
@@ -80,8 +80,8 @@
 					out.println("<OPTION VALUE='"+p_id+"' SELECTED> "+first_n+" "+last_n+" ,ID: "+p_id+"</OPTION>");
 				}
 				out.println("</SELECT>");
-				out.println("<INPUT TYPE='submit' NAME='ManagePerson' VALUE='GO'> <a href ='AddPerson.jsp?AddPerson=1'><b>Add</b></a> ");
-				out.println("<a href ='RemovePerson.jsp?Remove=1'><b>Remove</b></a>");
+				out.println("<INPUT TYPE='submit' NAME='ManagePerson' VALUE='Manage'>");
+				out.println("<a href ='AddPerson.jsp?AddPerson=1'><b>Add</b></a>");
 				out.println("</FORM>");
 				
 				
@@ -100,8 +100,9 @@
 					out.println("<OPTION VALUE='"+s_id+"' SELECTED> "+loc+" "+s_type+","+s_id+"</OPTION>");
 				}
 				out.println("</SELECT>");
-				out.println("<INPUT TYPE='submit' NAME='ManageSensor' VALUE='GO'> <a href ='AddSensor.jsp?AddSensor=1'><b>Add</b></a>");
-				out.println("<a href ='RemoveSensor.jsp?RemoveSensor=1'><b>Remove</b></a>");
+				out.println("<INPUT TYPE='submit' NAME='ManageSensor' VALUE='Manage'>");
+				out.println("<a href ='AddSensor.jsp?AddSensor=1'><b>Add</b></a>");
+				
 				out.println("</FORM>");
 				try{
 					con.close();
