@@ -5,7 +5,7 @@
 <BODY>
 	<%@ page import="java.sql.*"%>
 	<%
-	if(request.getParameter("RemovePerson") != null && ((String)session.getAttribute("role"))!=null){
+	if(request.getParameter("RemoveUser") != null && ((String)session.getAttribute("role"))!=null){
 		String oracleId = (String)session.getAttribute("ORACLE_ID");
 		String oraclePassword = (String)session.getAttribute("ORACLE_PASSWORD");
 
@@ -32,9 +32,9 @@
 		if(canConnect){
 			Statement s=con.createStatement();
 			String sqlStatement=null;
-			String p_id = request.getParameter("person_id");
+			String p_id = request.getParameter("user_name");
 			ResultSet resSet=null;
-			sqlStatement = "DELETE FROM persons WHERE person_id="+p_id;
+			sqlStatement = "DELETE FROM users WHERE user_name='"+p_id+"'";
 			resSet = s.executeQuery(sqlStatement);
 			con.close();
 		}
@@ -43,6 +43,7 @@
 	else{
 		response.sendRedirect("administrator.jsp");
 	}
+	
 
 	
 	%>

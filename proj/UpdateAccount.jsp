@@ -22,11 +22,11 @@
 		}
 		catch(Exception e){
 			canConnect = false;
-			out.println("<p><b>Unable to Connect Oracle DB!</b></p>");
-			out.println("<p><b>Invalid UserName or Password!</b></p>");
-			out.println("<p><b>Press Return to the previous page.</b></p>");
+			out.println("<CENTER><font color=Gold><p><b>Unable to Connect Oracle DB!</b></p></CENTER>");
+			out.println("<CENTER><font color=Gold><p><b>Invalid UserName or Password!</b></p></CENTER>");
+			out.println("<CENTER><font color=Gold><p><b>Press RETURN to the previous page.</b></p></CENTER>");
 			out.println("<FORM NAME='ConnectFailForm' ACTION='Connector.html' METHOD='get'>");
-			out.println("<INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='Return'>");
+			out.println("<CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='Return'></CENTER>");
 			out.println("</FORM>");
     	}
 		if(canConnect){
@@ -158,6 +158,7 @@
 			out.println("<FORM NAME='CancelForm' ACTION='administrator.jsp' METHOD='get'>");
 			out.println("<CENTER><INPUT TYPE='submit' NAME='cancel' VALUE='Back'></CENTER>");
 			out.println("</FORM>");
+			out.println("<CENTER><a href ='RemoveUser.jsp?RemoveUser=1&user_name="+user_name+"'><b>Remove</b></a></CENTER>");
 			con.close();
 		}
 	}

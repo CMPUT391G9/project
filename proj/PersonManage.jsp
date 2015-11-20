@@ -88,6 +88,7 @@
 			out.println("<FORM NAME='CancelForm' ACTION='administrator.jsp' METHOD='get'>");
 			out.println("<Center><INPUT TYPE='submit' NAME='cancel' VALUE='Back'></Center>");
 			out.println("</FORM>");
+			out.println("<CENTER><a href ='RemovePerson.jsp?RemovePerson=1&person_id="+person_id+"'><b>Remove</b></a></CENTER>");
 			con.close();
 		}
 	}

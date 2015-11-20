@@ -78,6 +78,9 @@
 			out.println("<FORM NAME='CancelForm' ACTION='administrator.jsp' METHOD='get'>");
 			out.println("<Center><INPUT TYPE='submit' NAME='cancel' VALUE='Back'></Center>");
 			out.println("</FORM>");
+			
+			out.println("<CENTER><a href ='RemoveSensor.jsp?RemoveSensor=1&sensor_id="+sensor_id+"'><b>Remove</b></a></CENTER>");
+			
 			con.close();
 		}
 	}
