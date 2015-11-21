@@ -83,74 +83,68 @@
 	            	}
                         
  
-                        out.println("<BR></BR>");
-                        out.println("<BR></BR>");
-	                out.println("<H1><font color=Gold><CENTER>Hello Scientist! This is the search page.</CENTER></font></H1>");
-                        out.println("<BR></BR>");
-                        out.println("<H2><font color=Gold>Please enter the Information you want to Search: </font></H2>");
-	                out.println("<FORM NAME="search_form" ACTION="Search.jsp" METHOD="post">");
-		        out.println("<TABLE>");
+            out.println("<BR></BR>");
+            out.println("<BR></BR>");
+	        out.println("<H1><font color=Gold><CENTER>Hello Scientist! This is the search page.</CENTER></font></H1>");
+            out.println("<BR></BR>");
+            out.println("<H2><font color=Gold>Please enter the Information you want to Search: </font></H2>");
+	        out.println("<FORM NAME='search_form' ACTION='Search.jsp' METHOD='post'>");
+		    out.println("<TABLE>");
 			out.println("<TR>");
 			out.println("<TD><B><I><font color=HotPink>Search keys:&nbsp;&nbsp;&nbsp;</TD>");
-			out.println("<TD style="width: 205px;"><INPUT TYPE="text" NAME="search_key"
-					VALUE="" style="width: 194px;">");
+			out.println("<TD><INPUT TYPE='text' NAME='search_key' VALUE=''></TD>");
 			out.println("</TR>");
 			out.println("<TR>");
-                        out.println(" <TD><B><I><font color=HotPink>Location:&nbsp;</TD>");
-                        out.println(" <TD style="width: 205px;"><INPUT TYPE="text" NAME="search_location"
-					VALUE="" style="width: 194px;"></TD>");
+            out.println(" <TD><B><I><font color=HotPink>Location:&nbsp;</TD>");
+            out.println(" <TD><INPUT TYPE='text' NAME='search_location' VALUE=''></TD>");
 			out.println("</TR>");
 			out.println("<TR>");
-                        out.println(" <TD><B><I><font color=HotPink>Sensor type:&nbsp;</TD>");
-                        out.println(" <TD style="width: 205px;"><INPUT TYPE="text" NAME="search_sensor_type"
-					VALUE="" style="width: 194px;"></TD>");
+            out.println(" <TD><B><I><font color=HotPink>Sensor type:&nbsp;</TD>");
+            out.println(" <TD><INPUT TYPE='text' NAME='search_sensor_type' VALUE=''></TD>");
 			out.println("</TR>");
-                        out.println(" <TR>");
+            out.println(" <TR>");
 			out.println("<TD><B><I><font color=HotPink>Time period:</font></I></B></TD>");
-			out.println("<TD><label for="from"><font color=HotPink>&nbsp;From</font></label>");
-                        out.println(" <INPUT TYPE="text" class="from" NAME="from" /></TD>");
-			out.println("<TD><label for="to"><font color=HotPink >To</font></label>");
-                        out.println(" <INPUT TYPE="text" class="to" NAME="to" /><font color=HotPink >*</font></TD>");
-                        out.println("</TR>");
-                        out.println("</TABLE>");
-                        out.println(" <br><B><I><font color=HotPink>filter by:</font></I></B><select NAME="OPERATION">");
-			out.println("<option VALUE="newest-to-oldest" SELECTED>newest to oldest</option>");
-			out.println("<option VALUE="oldest-to-newest" SELECTED>oldest to newest</option>");
-		        out.println("</select> <input TYPE="submit" NAME="CommitSearch" VALUE="Search"><br>");
-                        out.println(" <BR></BR>");
-                        out.println("<b><font color=Gold>Here is the list of all sensor records for satisfied the search condition.</font></b>");
+			out.println("<TD><label for='from'><font color=HotPink>&nbsp;From</font></label>");
+            out.println(" <INPUT TYPE='text' class='from' NAME='from' /></TD>");
+			out.println("<TD><label for='to'><font color=HotPink >To</font></label>");
+            out.println(" <INPUT TYPE='text' class='to' NAME='to' /><font color=HotPink >*</font></TD>");
+            out.println("</TR>");
+            out.println("</TABLE>");
+            out.println(" <br><B><I><font color=HotPink>filter by:</font></I></B><select NAME='OPERATION'>");
+			out.println("<option VALUE='a' SELECTED>newest to oldest</option>");
+			out.println("<option VALUE='b' SELECTED>oldest to newest</option>");
+		    out.println("</select> <input TYPE='submit' NAME='CommitSearch' VALUE='Search'><br>");
+            out.println(" <BR></BR>");
+            out.println("<b><font color=Gold>Here is the list of all sensor records for satisfied the search condition.</font></b>");
 
         
-                        if (request.getParameter("CommitSearch") != null) {
-                                if(!(request.getParameter("search_key").equals("")&&
-                                     request.getParameter("search_location").equals("")&&
-                                     request.getParameter("search_sensor_type").equals("")&&
-                                     request.getParameter("from").equals("") &&
-                                     request.getParameter("to").equals(""))) {
-			             String op = request.getParameter("OPERATION").trim();
-            	                     if(request.getParameter("from").equals("") && request.getParameter("to").equals("")){
-            		                   out.println("<br><b>Cannot filter by best match if there is no search key</b>");
-            	                     }
-                                }
-			        else{
-				        String dropFullname = "DROP TABLE fullname";
-	            	                String crFullname = "CREATE TABLE fullname AS "
-	            			+"(SELECT person_id, CONCAT(CONCAT(first_name,' '),last_name) as full_name FROM persons)";
-
-	            	                String crIndexName = "CREATE INDEX name ON fullname(full_name) INDEXTYPE IS CTXSYS.CONTEXT";
-	            	                String sqlString = "";
-	                                String from = "";
-					String to = "";
+            if (request.getParameter("CommitSearch") != null) {
+            	if(!(request.getParameter("search_key").equals("")&&
+                	request.getParameter("search_location").equals("")&&
+                    request.getParameter("search_sensor_type").equals("")&&
+                    request.getParameter("from").equals("") &&
+                    request.getParameter("to").equals(""))) {
+            	
+            		String op1 = "a"
+      					String op = request.getParameter("OPERATION");
+  	                    if(request.getParameter("from").equals("") && request.getParameter("to").equals("")){
+  		                	out.println("<br><b>Cannot filter if there is no search key</b>");
+  	                    }
+                }
+			    else{
+					String dropFullname = "DROP TABLE fullname";
+	            	String crFullname = "CREATE TABLE fullname AS "+"(SELECT person_id, CONCAT(CONCAT(first_name,' '),last_name) as full_name FROM persons)";
+					String crIndexName = "CREATE INDEX name ON fullname(full_name) INDEXTYPE IS CTXSYS.CONTEXT";
 					String search_key = "";
-                                        String search_location = "";
-                                        String search_sensor_type = "";
-					String oracleId=(String)session.getAttribute("ORACLE_ID");
-					String oraclePassword=(String)session.getAttribute("ORACLE_PASSWORD");
-                                }
+                    String search_location = "";
+                    String search_sensor_type = "";
+					String OracleId=(String)session.getAttribute("ORACLE_ID");
+					String OraclePassword=(String)session.getAttribute("ORACLE_PASSWORD");
+                }
 
                   
 				if(request.getParameter("search_key").equals("")){
-				    	sqlString = "SELECT DISTINCT ar.recording_id,ar.date_created, ar.length, ar.recording_data, ar.description"
+				    	String sqlString = "SELECT DISTINCT ar.recording_id,ar.date_created, ar.length, ar.recording_data, ar.description"
 				    		+"i.image_id, i.date_created, i.recorded_data,i.thumbnail, i.description "
                                                 +"sd.id, sd.date_created, sd.value"
 				    		+"FROM audio_recordings ar, images i, scalar_data sd WHERE ";
@@ -159,13 +153,13 @@
 					}
 
 					if(!(request.getParameter("from").equals(""))){
-						from = (String)request.getParameter("from");
+						String from = (String)request.getParameter("from");
 						sqlString = sqlString + "ar.date_created >= to_date('"+from+"','MM/DD/YYYY')"
                                                          +" AND i.date_created  >= to_date('"+from+"','MM/DD/YYYY')"
                                                          +" AND sd.date_created >= to_date('"+from+"','MM/DD/YYYY')";
 					}
 					if(!(request.getParameter("to").equals(""))){
-						to = (String)request.getParameter("to");
+						String to = (String)request.getParameter("to");
 						sqlString = sqlString + "ar.date_created <= to_date('"+to+"','MM/DD/YYYY') "
                                                          + " AND i.date_created  >= to_date('"+to+"','MM/DD/YYYY') "
                                                          +" AND sd.date_created >= to_date('"+to+"','MM/DD/YYYY') ";
@@ -174,10 +168,10 @@
 				        
 
 
-				 if(op.equals("newest-to-oldest")){
+				 if(op1 == "a"){
 				    	sqlString = sqlString + "ORDER BY ar.date_created DESC, i.date_created DESC, sd.date_created DESC";
 				 }
-				 else if(op.equals("oldest-to-newest")){
+				 else if(op1 == "b")){
 				    	sqlString = sqlString + "ORDER BY ar.date_created ASE, i.date_created ASE, sd.date_created ASE";
 				 }
 
