@@ -59,14 +59,14 @@
 					Integer person_id=resSet.getInt("person_id");
 					String first_name=resSet.getString("first_name");
 					String last_name=resSet.getString("last_name");
-					out.println("           	<OPTION VALUE='"+person_id+"' SELECTED> "+first_name+" "+last_name+" ;ID: "+person_id+"</OPTION>");
+					out.println("<OPTION VALUE='"+person_id+"' SELECTED> "+first_name+" "+last_name+" ;ID: "+person_id+"</OPTION>");
 				}
 				//-------------------------------
-				out.println("			</SELECT>");
-				out.println("		</TR>");
-				out.println("	</TABLE>");
+				out.println("</SELECT>");
+				out.println("</TR>");
+				out.println("</TABLE>");
 
-				out.println("   <CENTER><INPUT TYPE='submit' NAME='AddUserComm' VALUE='Add'></CENTER>");
+				out.println("<CENTER><INPUT TYPE='submit' NAME='AddUserComm' VALUE='Add'></CENTER>");
 				out.println("</FORM>");
 				con.close();
 				

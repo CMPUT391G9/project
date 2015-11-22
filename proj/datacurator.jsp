@@ -54,26 +54,14 @@
 			last_name=resSet.getString("last_name");
 		}
 		out.println("<BR></BR><BR></BR><H1><CENTER><font color=Gold>Hello! Data Curator: <a href='PersonalInfo.jsp?Manage=1'><b>"+first_name+" "+last_name+"</b></a> </font></CENTER></H1>");
-       	out.println("<BR></BR>");
-       	out.println("<H3><font color=Gold>This is an Uploading Module</font></H3>");
+
         out.println("<BR></BR>");
-        out.println("<ul>");
-        out.println("<li><font color=DarkOrchid> Please select an csv file to upload an audio recording:</font></li>");
-        out.println("<FORM NAME='upload_rec_form' ACTION='UploadRec_Processor.jsp' ENCTYPE='multipart/form-data' METHOD='post'>");
-		out.println("<H2><input name='filePath' type='file' size='30' multiple/></H2>");
-		out.println("<H3><input name='CommitUploadPic' type='submit' value='Upload'></H3>");
+        out.println("<CENTER><a href ='UploadImg.jsp?UploadImg=1'><b>Upload Image</b></a></CENTER>");
         out.println("<BR></BR>");
-        out.println("<li><font color=DarkOrchid> Please select an csv file to upload an image:</font></li>");
-        out.println("<FORM NAME='upload_img_form' ACTION='UploadImg_Processor.jsp' ENCTYPE='multipart/form-data' METHOD='post'>");
-		out.println("<H2><input name='filePath' type='file' size='30' multiple/></H2>");
-		out.println("<H3><input name='CommitUploadPic' type='submit' value='Upload'></H3>");
-		out.println("</FORM>");
+        out.println("<CENTER><a href ='UploadAud.jsp?UploadAud=1'><b>Upload Audio</b></a></CENTER>");
         out.println("<BR></BR>");
-        out.println("<li><font color=DarkOrchid> Please select an csv file to upload an scalar measurements:</font></li>");
-        out.println("<FORM NAME='upload_sca_form' ACTION='Uploadsca_Processor.jsp' ENCTYPE='multipart/form-data' METHOD='post'>");
-		out.println("<H2><input name='filePath' type='file' size='30' multiple/></H2>");
-		out.println("<H3><input name='CommitUploadPic' type='submit' value='Upload'></H3>");
-        out.println("</ul>");
+        out.println("<CENTER><a href ='UploadSca.jsp?UploadSca=1'><b>Upload Scalar Data</b></a></CENTER>");
+        out.println("<BR></BR>");
 	}	
 	%>
 	<BR></BR>
