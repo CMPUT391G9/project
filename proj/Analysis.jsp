@@ -24,21 +24,21 @@
 <BODY background="login.jpg">
 	<%@ page import="java.sql.*"%>
 	<%
-		if(session.getAttribute("AnalysisData") != null){
+	
+		if(request.getParameter("AnalysisData") != null  && ((String)session.getAttribute("role"))!=null){
 			String userName = (String)session.getAttribute("USERNAME");
 			String oracleId = (String)session.getAttribute("ORACLE_ID");
 			String oraclePassword = (String)session.getAttribute("ORACLE_PASSWORD");
-	
 			Connection con = null;
 			String driverName = "oracle.jdbc.driver.OracleDriver";
-				String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+			String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 			Boolean canConnect = true;
 			
-				try {
+			try {
 				Class drvClass = Class.forName(driverName);
 				DriverManager.registerDriver((Driver)drvClass.newInstance());
 				con = DriverManager.getConnection(dbstring,oracleId,oraclePassword);
-					con.setAutoCommit(false);
+				con.setAutoCommit(false);
 			}
 			catch (Exception e) {
 				canConnect = false;
@@ -49,91 +49,67 @@
 				out.println("    <CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='RETURN'></CENTER>");
 				out.println("</FORM>");
 			}
-				
+			if(canConnect){
 				Statement s=con.createStatement();
 				ResultSet resSet=null;
 				String sqlStatement=null;
+
+				out.println("<BR></BR>");
+				out.println("<H1><CENTER><font color=Gold>Analysis Data: </font></CENTER></H1>");
+				out.println("<BR></BR>");
 				
-				sqlStatement="SELECT person_id FROM users WHERE user_name='"+userName+"'";
+				out.println("<FORM NAME='AnalysisForm' ACTION='AnalysisComm.jsp' METHOD='post'>");
+				String p_id = request.getParameter("person_id");
+				String sql="SELECT * FROM persons WHERE person_id="+p_id;
+				resSet=s.executeQuery(sql);
+				while(resSet != null && resSet.next()){
+					String fname=resSet.getString("first_name");
+					String lname=resSet.getString("last_name"); 
+					out.println("<H2><CENTER><font color=Gold>Scientist: "+fname+" "+lname+" ID: "+p_id+"</font></CENTER></H2>");
+				}
+				out.println("<BR></BR>");
+				out.println("<B><font size = 4><font color=Gold>Select Sensor: </font></B>");
+				out.println("<SELECT NAME='ID'>");
+				sqlStatement="SELECT * FROM subscriptions WHERE person_id="+p_id;
+				resSet=s.executeQuery(sqlStatement);
+				while(resSet.next()){
+					Integer s_id=resSet.getInt("sensor_id");
+					out.println("<OPTION VALUE='"+s_id+"' SELECTED> ID: "+s_id+"</OPTION>");
+				}
+				out.println("</SELECT>");
+				
+				out.println("<BR></BR>");
+				
+				out.println("<B><I><font color=Gold>Group by range:</font></I></B>");
+				out.println("<SELECT NAME='groupByRange'>");
+				out.println("<OPTION VALUE='week' SELECTED> Weekly </OPTION>");
+				out.println("<OPTION VALUE='month' SELECTED> Monthly </OPTION>");
+				out.println("<OPTION VALUE='year' SELECTED> Yearly </OPTION>");
+				out.println("<OPTION VALUE='daily' SELECTED> Daily </OPTION>");
+				out.println("<OPTION VALUE='quarterly' SELECTED> Quarterly </OPTION>");
+				out.println("</SELECT>");
+				out.println("<BR></BR>");
+				out.println("<BR></BR>");
+				out.println("<INPUT TYPE='hidden' NAME='person_id' VALUE='"+p_id+"'>");
+				out.println("<CENTER><INPUT TYPE='submit' NAME='AnalysisComm' VALUE='Analysis'></CENTER>");
+				//out.println("<CENTER><a href='AnalysisComm.jsp?AnalysisComm=1&person_id="+p_id+"&sensor_id="+s_id+"'><b>Subscribe</b></a></CNETER>");
+				con.close();
+				
+			}
 		}
-				
-		
+		else{
+			out.println("<p><b>You have no right to use this module</b></p>");
+			out.println("<p><b>Press RETURN to the login page.</b></p>");
+			out.println("<FORM NAME='NotAllowFrom' ACTION='Login.html' METHOD='get'>");
+			out.println("    <CENTER><INPUT TYPE='submit' NAME='NOT_ALLOW' VALUE='RETURN'></CENTER>");
+			out.println("</FORM>");
+		}
+
 	%>
-	<H1>
-		<CENTER>
-			<font color=Teal>Please Enter the information to search the database for analysis: </font>
-		</CENTER>
-	</H1>
-	
-	<FORM NAME="ConfrimAnalysis" ACTION="ConfrimAnalysis.jsp"
-		METHOD="post">
-		<TABLE style="margin: 0px auto">
-			<TR>
-				<TD><B><I><font color=Maroon>Select a patient: </font></I></B></TD>
-				<TD>
-					<SELECT NAME='patientID'>
-					<%
-						Connection con=getConnection((String)session.getAttribute("ORACLE_ID"),(String)session.getAttribute("ORACLE_PASSWORD"));
-						Statement s=con.createStatement();
-						String sql="SELECT * FROM persons p WHERE p.person_id=ANY(SELECT u.person_id FROM users u WHERE u.class='p')";
-						ResultSet resSet=s.executeQuery(sql);
-						while(resSet.next()){
-							Integer id=resSet.getInt("person_id");
-							String fname=resSet.getString("first_name");
-							String lname=resSet.getString("last_name");
-							out.println("<OPTION VALUE='"+id+"' SELECTED> "+fname+" "+lname+" ,ID: "+id+" </OPTION>");
-						}
-						con.close();
-					%>
-					<OPTION VALUE="" SELECTED> Null </OPTION>
-					</SELECT>
-				</TD>
-			</TR>
-			<TR>
-				<TD></TD>
-				<TD>
-					<input type="checkbox" name="GroupByPatient" value="True"><B><I><font color=Teal>Group by this attribute.</font></I></B>
-				</TD>
-			</TR>
-			<TR>
-				<TD><B><I><font color=Maroon>Test Type: </font></I></B></TD>
-				<TD><INPUT TYPE="text" NAME="testType" VALUE=""></TD>
-			</TR>
-			<TR>
-				<TD></TD>
-				<TD>
-					<input type="checkbox" name="GroupByTestType" value="True"><B><I><font color=Teal>Group by this attribute.</font></I></B>
-				</TD>
-			</TR>
-			<TR>
-				<TD><B><I><font color=Maroon>From (MM-DD-YYYY): </font></I></B></TD>
-				<TD><INPUT TYPE="text" CLASS="datepicker" NAME="fDate" VALUE=""></TD>
-			</TR>
-			<TR>
-				<TD><B><I><font color=Maroon>To (MM-DD-YYYY): </font></I></B></TD>
-				<TD><INPUT TYPE="text" CLASS="datepicker" NAME="tDate" VALUE=""></TD>
-			</TR>
-			<TR>
-				<TD><B><I><font color=Maroon>Group by range:</font></I></B></TD>
-				<TD>
-					<SELECT NAME='groupByRange'>
-						<OPTION VALUE='week' SELECTED> Week </OPTION>
-						<OPTION VALUE='month' SELECTED> Month </OPTION>
-						<OPTION VALUE='year' SELECTED> Year </OPTION>
-						<OPTION VALUE="" SELECTED> Null </OPTION>
-					</SELECT>
-				</TD>
-			</TR>
-			<TR>
-				<TD>
-					<CENTER><INPUT TYPE='submit' NAME='StartAnalysis' VALUE='Go!'></CENTER>
-				</TD>
-			</TR>
-		</TABLE>
+
+	<FORM NAME='ReturnForm' ACTION='scientist.jsp' METHOD='get'>
+	<CENTER><INPUT TYPE='submit' NAME='return' VALUE='Back'></CENTER>
 	</FORM>
-	<FORM NAME='ReturnForm' ACTION='administrator.jsp' METHOD='get'>
-	<CENTER><INPUT TYPE='submit' NAME='return' VALUE='RETURN'></CENTER>
-	</FORM>"
 	<CENTER>User Documentation:<a href='Documentation.html' target ='_blank'><b>Documentation</b></a></CENTER>
 </BODY>
 </HTML>

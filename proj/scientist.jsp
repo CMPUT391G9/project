@@ -64,7 +64,7 @@
 	        		out.println("<BR></BR>");
 	        		out.println("<H3><CENTER><a href='Subscribe.jsp?Subscribe=1&person_id="+personId+"'><b>Subscribe Data</b></a></CNETER></H3>");
 	        		out.println("<BR></BR>");
-	        		out.println("<H3><CENTER><a href='Analysis.jsp?UploadRecord=1'><b>Data Analysis</b></a></H3>");
+	        		out.println("<H3><CENTER><a href='Analysis.jsp?AnalysisData=1&person_id="+personId+"'><b>Data Analysis</b></a></H3>");
 				}
 			
 		%>
