@@ -64,8 +64,7 @@
 			out.println("<BR></BR>");
 			out.println("<H1><CENTER><font color=Gold>Please Choose the pictures to be upload: </font></CENTER></H1>");
 			out.println("<BR></BR><BR></BR>");
-			out.println("<FORM NAME='upload_pic_form' ACTION='UploadImg_Processor.jsp' METHOD='post'>");
-
+			out.println("<FORM NAME='upload_img_form' ACTION='UploadImg_Processor.jsp' enctype='multipart/form-data' METHOD='post'>");
 			out.println("<B><I><font color=Gold> Image ID: </font></I></B> <INPUT TYPE='text' NAME='ImgID' VALUE=''>");
 			out.println("<BR></BR>");
 			out.println("<B><I><font color=Gold> Sensor ID: </font></I></B>");
@@ -81,9 +80,8 @@
 				out.println("<OPTION VALUE='"+s_id+"' SELECTED> "+loc+" "+s_type+","+s_id+"</OPTION>");
 			}
 			out.println("</SELECT>");
-
-			//out.println("<BR></BR>");
-			//out.println("<B><I><font color=GOLD>Date: </font></I></B> <INPUT TYPE='text' class='at' NAME='at' />");
+			out.println("<BR></BR>");
+			out.println("<B><I><font color=GOLD>Date: </font></I></B> <INPUT TYPE='text' class='at' NAME='at' />");
 			
 			out.println("<BR></BR>");
 			out.println("<B><I><font color=Gold> Description: </font></I></B> <INPUT TYPE='text' NAME='Des' VALUE=''>");
@@ -92,11 +90,12 @@
 			//out.println("<B><I><font color=Gold> Select Image: </font></I></B> <input name='filePath1' type='file' size='30'>");
 			
 			out.println("<BR></BR>");
-			out.println("<B><I><font color=Gold> Select Recorded Data: </font></I></B> <input name='filePath2' type='file' size='30'>");
+			out.println("<B><I><font color=Gold> Select Image: </font></I></B> <input name='filePath2' type='file' size='30'>");
 			
 			out.println("<BR></BR>");
 			out.println("<INPUT TYPE='submit' NAME='UploadPicComm' VALUE='Upload'></CENTER>");
 			out.println("</FORM>");
+			
 			con.close();
 		}
 	%>
