@@ -37,9 +37,13 @@
 	});
 </script>
 
+
 <BODY background="login.jpg">
  	<%@ page import="java.sql.*"%>
 	<%
+	
+	int num = 1;
+	
 	if(request.getParameter("SearchRequest") != null || request.getParameter("CommitSearch") != null){
 		String oracleId = (String)session.getAttribute("ORACLE_ID");
 		String oraclePassword = (String)session.getAttribute("ORACLE_PASSWORD");
@@ -63,24 +67,23 @@
 			out.println("<FORM NAME='ConnectFailForm' ACTION='Connector.html' METHOD='get'>");
 			out.println("    <CENTER><INPUT TYPE='submit' NAME='CONNECTION_FAIL' VALUE='Return'></CENTER>");
 			out.println("</FORM>");
-    	         }
-                 if (canConnect){
-                        Statement s =  null;
-                        ResultSet rs = null; 
+		}
+		
+        if (canConnect){
+        	Statement s = con.createStatement();
+        	ResultSet resSet = null;
 			String personID = (String)session.getAttribute("person_id");
-                        String sqlstr = "SELECT sensor_id FROM subscription WHERE person_id = '"+personID+"'";
-                        try {
-                                s = con.createStatement();
-                                rs = s.executeQuery(sqlstr);
-                        }
-                        catch(Exception e){
-                                out.println("<hr>"+e.getMessage()+"<hr>");
-                        }
-
-	                Integer sensorId = null;
-	            	while(rs != null && rs.next()){
-	                        sensorId = (rs.getInt("sensor_id"));
-	            	}
+			//out.println(personID);
+			String sqlstr = null;
+            sqlstr = "SELECT sensor_id FROM subscriptions WHERE person_id = "+personID;
+        
+	        resSet = s.executeQuery(sqlstr);
+	        Integer sensorId =null;
+	        while (resSet.next()){
+	        	out.println("asdfasd");
+	        	sensorId = resSet.getInt("sensor_id");
+	        }
+	        out.println(sensorId);
                         
  
             out.println("<BR></BR>");
@@ -92,11 +95,19 @@
 		    out.println("<TABLE>");
 			out.println("<TR>");
 			out.println("<TD><B><I><font color=HotPink>Search keys:&nbsp;&nbsp;&nbsp;</TD>");
+<<<<<<< HEAD
+			out.println("<TD><INPUT TYPE='text' NAME='search_key' VALUE=''>");
+			out.println("</TR>");
+			out.println("<TR>");
+            out.println("<TD><B><I><font color=HotPink>Location:&nbsp;</TD>");
+            out.println("<TD><INPUT TYPE='text' NAME='search_location' VALUE=''></TD>");
+=======
 			out.println("<TD><INPUT TYPE='text' NAME='search_key' VALUE=''></TD>");
 			out.println("</TR>");
 			out.println("<TR>");
             out.println(" <TD><B><I><font color=HotPink>Location:&nbsp;</TD>");
             out.println(" <TD><INPUT TYPE='text' NAME='search_location' VALUE=''></TD>");
+>>>>>>> f553d6a5fa074fe7571283318b7c32a20544b99e
 			out.println("</TR>");
 			out.println("<TR>");
             out.println(" <TD><B><I><font color=HotPink>Sensor type:&nbsp;</TD>");
@@ -105,6 +116,17 @@
             out.println(" <TR>");
 			out.println("<TD><B><I><font color=HotPink>Time period:</font></I></B></TD>");
 			out.println("<TD><label for='from'><font color=HotPink>&nbsp;From</font></label>");
+<<<<<<< HEAD
+            out.println(" <INPUT TYPE='text' class='from' NAME='from'></TD>");
+			out.println("<TD><label for='to'><font color=HotPink >To</font></label>");
+            out.println(" <INPUT TYPE='text' class='to' NAME='to'><font color=HotPink >*</font></TD>");
+            out.println("</TR>");
+            out.println("</TABLE>");
+		    out.println("</select> <input TYPE='submit' NAME='CommitSearch' VALUE='Search'><br>");
+            out.println(" <BR></BR>");
+            out.println("<b><font color=Gold>Here is the list of all sensor records for satisfied the search condition.</font></b>");
+
+=======
             out.println(" <INPUT TYPE='text' class='from' NAME='from' /></TD>");
 			out.println("<TD><label for='to'><font color=HotPink >To</font></label>");
             out.println(" <INPUT TYPE='text' class='to' NAME='to' /><font color=HotPink >*</font></TD>");
@@ -116,9 +138,56 @@
 		    out.println("</select> <input TYPE='submit' NAME='CommitSearch' VALUE='Search'><br>");
             out.println(" <BR></BR>");
             out.println("<b><font color=Gold>Here is the list of all sensor records for satisfied the search condition.</font></b>");
+>>>>>>> f553d6a5fa074fe7571283318b7c32a20544b99e
 
+            String sqlString = "";
+	    	String fdate = request.getParameter("from");
+	    	String tdate = request.getParameter("to");
+			String searchKey = request.getParameter("search_key");
+            String searchLocation = request.getParameter("search_location");
+            String searchSType= request.getParameter("search_sensor_type");
         
             if (request.getParameter("CommitSearch") != null) {
+<<<<<<< HEAD
+            	
+            	if(request.getParameter("from").equals("") &&
+            	   request.getParameter("to").equals("")) {
+            		out.println("<br><b>Must select a time period to search.</b>");
+                }
+            	
+            	out.println("haha");
+            	
+            	
+            	
+            	sqlString = "SELECT distinct ar.recording_id,ar.date_created, ar.length, ar.recorded_data, ar.description"
+				    		+"i.image_id, i.date_created, i.recoreded_data,i.thumbnail, i.description "
+                          +"sd.id, sd.date_created, sd.value"
+				    		+"FROM audio_recordings ar, images i, scalar_data sd WHERE "; 
+            	
+				
+				    		
+            	if(((String)session.getAttribute("role")).equals("s")){
+            		sqlString = sqlString +"ar.sensor_id ="+sensorId+", AND i.sensor_id = "+sensorId+", AND sd.sensor_id = "+sensorId ;
+            		out.println("hehe");
+			    }
+				    	
+
+            	if(fdate != null){
+				    sqlString = sqlString + "ar.date_created >= to_date('"+fdate+"','MM/DD/YYYY')"
+				                          +" AND i.date_created  >= to_date('"+fdate+"','MM/DD/YYYY')"
+                                        +" AND sd.date_created >= to_date('"+fdate+"','MM/DD/YYYY')";
+				    out.println("heihei");
+            	}
+
+            	if(tdate != null){
+
+            		sqlString = sqlString + "ar.date_created <= to_date('"+tdate+"','MM/DD/YYYY') "
+                                        + " AND i.date_created  >= to_date('"+tdate+"','MM/DD/YYYY') "
+                                        +" AND sd.date_created >= to_date('"+tdate+"','MM/DD/YYYY') ";
+            		out.println("lala");
+            	} 
+			
+=======
             	if(!(request.getParameter("search_key").equals("")&&
                 	request.getParameter("search_location").equals("")&&
                     request.getParameter("search_sensor_type").equals("")&&
@@ -166,104 +235,117 @@
 					}
 				 } 
 				        
+>>>>>>> f553d6a5fa074fe7571283318b7c32a20544b99e
 
+            	
+            	
+            	try{
+					/* PreparedStatement setTimeFormat = con.prepareStatement("alter SESSION set NLS_DATE_FORMAT = 'MM/DD/YYYY'");
+					setTimeFormat.executeQuery(); */
+					
+					num = num+170;
+					
+					Statement ss = con.createStatement();
+					num = 173;
+					
+		        	ResultSet rs = null;
+		        	num = 176;
+		        	
+		        	rs = ss.executeQuery(sqlString);
+		        	num = 179;
+					
+					/* PreparedStatement doGenerate = con.prepareStatement(sqlString);
+					ResultSet rset2 = doGenerate.executeQuery(); */
+					
+					num = num +177;
+					
+					out.println("<br>");
+				  	out.println("<br>");
+				  	
+				  	if (searchKey == null && searchLocation == null && searchSType == null){
+	            		out.println("All records from "+fdate+" to "+tdate+":");
+	            	}
+				
 
+<<<<<<< HEAD
+	            	if (searchKey == null && searchLocation == null) {
+	            		out.println("All records with sensor type "+searchSType+" from "+fdate+" to "+tdate+":");
+	            	}
+=======
 				 if(op1 == "a"){
 				    	sqlString = sqlString + "ORDER BY ar.date_created DESC, i.date_created DESC, sd.date_created DESC";
 				 }
 				 else if(op1 == "b")){
 				    	sqlString = sqlString + "ORDER BY ar.date_created ASE, i.date_created ASE, sd.date_created ASE";
 				 }
+>>>>>>> f553d6a5fa074fe7571283318b7c32a20544b99e
 
+	            	if (searchKey == null){
+	            		out.println("All records with sensor type "+searchSType+" and "+searchLocation+" from "+fdate+" to "+tdate+":");
+	            		}
 
-				try{
-					PreparedStatement setTimeFormat = con.prepareStatement("alter SESSION set NLS_DATE_FORMAT = 'MM/DD/YYYY'");
-					setTimeFormat.executeQuery();
-					PreparedStatement dropTableName = con.prepareStatement(dropFullname);
-					PreparedStatement createTableName = con.prepareStatement(crFullname);
-					createTableName.executeQuery();
-					PreparedStatement createIndexName = con.prepareStatement(crIndexName);
-					createIndexName.executeQuery();
-					PreparedStatement takeImageID = con.prepareStatement("select image_id from images where sensor_id = ?");
-					PreparedStatement doGenerate = con.prepareStatement(sqlString);
-					ResultSet rset2 = doGenerate.executeQuery();
-					ResultSet imageID = null;
+	            	if (searchSType == null && searchLocation == null){
+	            		out.println("All records with "+searchKey+" key words from "+fdate+" to "+tdate+":");
+	            		}
+				
 
-					out.println("<br>");
-				        out.println("<br>");
-				        if(!(request.getParameter("search_key").equals("") &&
-				             request.getParameter("from").equals("") &&
-				             request.getParameter("to").equals(""))){
-						out.println("All records with "+search_key+" key words from "+from+" to "+to+":");
-                                        }
-                                        else if(request.getParameter("search_key").equals("") && 
-						request.getParameter("from").equals("") &&
-                                                request.getParameter("to").equals("")){
-						out.println("All records from "+from+" to "+to+":");
-                                        }
-					else if(!request.getParameter("search_location").equals("") && 
-						request.getParameter("from").equals("") &&
-                                                request.getParameter("to").equals("")){	
-						out.println("All records with "+search_location+" from "+from+" to "+to+":");
-                                        }
-				        else if (!request.getParameter("search_sensor_type").equals("") && 
-						request.getParameter("from").equals("") &&
-                                                request.getParameter("to").equals(""))	{
-						out.println("All records with "+search_sensor_type+" from "+from+" to "+to+":");
-                                        }
-					else if (!request.getParameter("search_sensor_type").equals("") && 
-                                                 !request.getParameter("search_location").equals("") &&
-						 request.getParameter("from").equals("") &&
-                                                 request.getParameter("to").equals(""))	{
-					         out.println("All records with sensor type "+search_sensor_type+" and "+search_location+" from "+from+" to "+to+":");
-                                        }
-					else if (!request.getParameter("search_key").equals("") && 
-                                                 !request.getParameter("search_location").equals("") &&
-						 request.getParameter("from").equals("") &&
-                                                 request.getParameter("to").equals(""))	{
-						 out.println("All records with keyword "+search_key+" and "+search_location+" from "+from+" to "+to+":");
-                                        }
-				        else if (!request.getParameter("search_sensor_type").equals("") && 
-                                                 !request.getParameter("search_key").equals("") &&
-						 request.getParameter("from").equals("") &&
-                                                 request.getParameter("to").equals(""))	{
-						 out.println("All records with sensor type "+search_sensor_type+" and "+search_key+" from "+from+" to "+to+":");
-                                        }
-					else if (!request.getParameter("search_sensor_type").equals("") && 
-                                                 !request.getParameter("search_location").equals("") &&
-                                                 !request.getParameter("search_key").equals("") &&
-						 request.getParameter("from").equals("") &&
-                                                 request.getParameter("to").equals(""))		
-						 out.println("All records with sensor type "+search_sensor_type+" and "+search_location+" and key "+search_key+" from "+from+" to "+to+":");
-                                        }
-						  	
+	            	if (searchSType == null && searchKey == null){
+	            		out.println("All records with "+searchLocation+" from "+fdate+" to "+tdate+":");
+	            		}
+				
 
-                                        out.println("<br>");
-					out.println("*date format is MM/DD/YYYY");
-					out.println("<br>");
-					out.println("*click on the thumbnail to see details");
-					out.println("<br>");
+	            	if (searchLocation == null){
+	            		out.println("All records with sensor type "+searchSType+" and "+searchKey+" from "+fdate+" to "+tdate+":");
+	            	}
+				
+
+	            	if (searchSType == null){
+	            		out.println("All records with keyword "+searchKey+" and "+searchLocation+" from "+fdate+" to "+tdate+":");
+
+	            	}
+	            	
+				  	out.println("<br>");
+				  	out.println("*date format is MM/DD/YYYY");
+				  	out.println("<br>");
+				  	out.println("*click on the thumbnail to see details");
+				  	out.println("<br>");
 					out.println("<table border=1>");
 					out.println("<tr>");
+					out.println("<th>Record ID</th>");
+					out.println("<th></th>");
+					out.println("<th>Sensor ID</th>");
+					out.println("<th>Test Date*</th>");
+					out.println("<th>Prescribing Date*</th>");
+					out.println("<th>Diagnosis*</th>");
+					out.println("<th>Description</th>");
+					out.println("<th>Thumbnail Record Photos*</th>");
+					out.println("</tr>");
 
-                                }
-				catch(SQLException e){
-					out.println("SQLException: " +e.getMessage());
-					con.rollback();
-				}
-				out.println("</table>");
-			}
-			con.close();
+
             	}
-
-            }
             	
-          else
-            {
-              out.println("<br><b>Search condition is missing.</b>");
+            	catch(SQLException e){
+            		out.println("xixi");
+            		out.println("<hr>"+e.getMessage()+"<hr>");
+                    con.rollback();
+				}
+            	
+            	con.close();
+            	
             }
+            
         }
-      %>
+        
+        else {
+        	response.sendRedirect("Login.html");
+        }
+	}
+	
+	out.println(num);
+            	
+	
+    
+    %>
 	</FORM>
 	
 	
