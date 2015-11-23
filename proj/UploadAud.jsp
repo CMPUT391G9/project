@@ -1,29 +1,5 @@
 <HTML>
 <TITLE>Picture choose page</TITLE>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
-<style>
-.at {
-	
-}
-
-</style>
-<!-- 
-<script>
-	$(function() {
-		$(".at").datepicker({
-			defaultDate : "+1w",
-			changeMonth : true,
-			changeYear : true,
-			onClose : function(selectedDate) {
-				$(".to").datepicker("option", "minDate", selectedDate);
-			}
-		});
-	});
-</script>
- -->
 
 <BODY background="login.jpg">
 	<%@ page import="java.sql.*"%>
@@ -56,25 +32,20 @@
 		Statement s=con.createStatement();
     	ResultSet resSet=null;
 		String sqlStatement=null;
-		
+
 		if(canConnect){
-		
 			out.println("<BR></BR>");
 			out.println("<H1><CENTER><font color=Gold>Please Choose the pictures to be upload: </font></CENTER></H1>");
 			out.println("<BR></BR><BR></BR>");
-			out.println("<FORM NAME='upload_pic_form' ACTION='UploadImg_Processor.jsp' ENCTYPE='multipart/form-data' METHOD='post'>");
-			//===
-			
-			out.println("<B><I><font color=Gold> Image ID: </font></I></B> <INPUT TYPE='text' NAME='ImgID' VALUE=''>");
+			out.println("<FORM NAME='upload_rec_form' ACTION='UploadAud_Processor.jsp' METHOD='post'>");
+			out.println("<B><I><font color=Gold> Record ID: </font></I></B> <INPUT TYPE='text' NAME='RecID' VALUE=''>");
 			out.println("<BR></BR>");
 			out.println("<B><I><font color=Gold> Sensor ID: </font></I></B>");
 			out.println("<SELECT NAME='ID'>");
 			sqlStatement="SELECT sensor_id, location, sensor_type, description FROM sensors";
 			resSet=s.executeQuery(sqlStatement);
-			Integer s_id = null;
-			
 			while(resSet.next()){
-				s_id=resSet.getInt("sensor_id");
+				Integer s_id=resSet.getInt("sensor_id");
 				String loc=resSet.getString("location");
 				String s_type=resSet.getString("sensor_type");
 				String s_des=resSet.getString("description");
@@ -82,36 +53,23 @@
 				out.println("<OPTION VALUE='"+s_id+"' SELECTED> "+loc+" "+s_type+","+s_id+"</OPTION>");
 			}
 			out.println("</SELECT>");
+
 			out.println("<BR></BR>");
-			out.println("<B><I><font color=GOLD>Date: </font></I></B> <INPUT TYPE='text' class='at' NAME='at' />");
+			out.println("<B><I><font color=Gold> Length: </font></I></B> <INPUT TYPE='text' NAME='len' VALUE=''>");
 			
 			out.println("<BR></BR>");
 			out.println("<B><I><font color=Gold> Description: </font></I></B> <INPUT TYPE='text' NAME='Des' VALUE=''>");
 			
-			//out.println("<BR></BR>");
-			//out.println("<B><I><font color=Gold> Select Image: </font></I></B> <input name='filePath1' type='file' size='30'>");
-			
-			out.println("<BR></BR>");
-			out.println("<H2><CENTER><input name='filePath' type='file' size='30' multiple/></CENTER></H2>");			
-			out.println("<BR></BR>");
 			java.util.Date dNow = new java.util.Date();
 			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
 			String catchDate = ft.format(dNow);
-			session.setAttribute("CURRENT_REC_ID",s_id);
-			session.setAttribute("CURRENT_date",catchDate);
-			String date=(String)(session.getAttribute("CURRENT_date")+"");
-			out.println(date);
-			//response.sendRedirect("UploadImg_Processor.jsp");
-			String sen_id=(String)(session.getAttribute("CURRENT_REC_ID")+"");
-			out.println(sen_id);
-			out.println("<H3><CENTER><input name='CommitUploadPic' type='submit' value='UploadPic'></CENTER></H3>");
-			//out.println("<INPUT TYPE='submit' NAME='UploadPicComm' VALUE='Upload'></CENTER>");
+			out.println("<BR></BR>");
+			out.println("<B><I><font color=Gold> Select Recorded Data: </font></I></B> <input name='filePath2' type='file' size='30'>");
+			
+			out.println("<BR></BR>");
+			out.println("<INPUT TYPE='hidden' NAME='date' VALUE='"+catchDate+"'>");
+			out.println("<INPUT TYPE='submit' NAME='UploadRecComm' VALUE='Upload'></CENTER>");
 			out.println("</FORM>");
-			
-			//response.sendRedirect("UploadImg_Processor.jsp");
-		
-			
-			
 			con.close();
 		}
 	%>

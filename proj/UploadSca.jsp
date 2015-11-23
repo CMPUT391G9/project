@@ -1,26 +1,6 @@
 <HTML>
 <TITLE>Picture choose page</TITLE>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
-<style>
-.at {
-	
-}
-<script>
-	$(function() {
-		$(".at").datepicker({
-			defaultDate : "+1w",
-			changeMonth : true,
-			changeYear : true,
-			onClose : function(selectedDate) {
-				$(".to").datepicker("option", "minDate", selectedDate);
-			}
-		});
-	});
-</script>
-</style>
+
 
 <BODY background="login.jpg">
 	<%@ page import="java.sql.*"%>
@@ -76,9 +56,6 @@
 			}
 			out.println("</SELECT>");
 
-/* 			out.println("<BR></BR>");
-			out.println("<B><I><font color=GOLD>Date: </font></I></B> <INPUT TYPE='text' class='at' NAME='at' />"); */
-			
 			out.println("<BR></BR>");
 			out.println("<B><I><font color=Gold> Value: </font></I></B> <INPUT TYPE='text' NAME='val' VALUE=''>");
 			
