@@ -82,8 +82,8 @@
 			}
 			out.println("</SELECT>");
 
-			//out.println("<BR></BR>");
-			//out.println("<B><I><font color=GOLD>Date: </font></I></B> <INPUT TYPE='text' class='at' NAME='at' />");
+			out.println("<BR></BR>");
+			out.println("<B><I><font color=GOLD>Date: </font></I></B> <INPUT TYPE='text' class='at' NAME='at' />");
 			
 			out.println("<BR></BR>");
 			out.println("<B><I><font color=Gold> Description: </font></I></B> <INPUT TYPE='text' NAME='Des' VALUE=''>");

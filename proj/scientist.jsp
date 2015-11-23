@@ -32,7 +32,7 @@
     			}
 				
 	      			Statement s=con.createStatement();
-	            	ResultSet resSet=null;
+	            	        ResultSet resSet=null;
 	       			String sqlStatement=null;
 	         		
 	        		sqlStatement="SELECT person_id FROM users WHERE user_name='"+userName+"'";
@@ -57,28 +57,23 @@
 	       				last_name=resSet.getString("last_name");
 	            	}
 	        		out.println("<BR></BR><BR></BR><BR></BR><H1><CENTER><font color =Gold>Hello! Scientist: <a href='PersonalInfo.jsp?Manage=1'><b>"+first_name+" "+last_name+"</b></a> </font></CENTER></H1>");
-                               
+	        		out.println("<BR></BR>");
+	        		out.println("<BR></BR>");
+	        		out.println("<BR></BR>");
+	        		out.println("<H3><CENTER><a href='Search.jsp?SearchRequest=1'><b>Search Records</b></a></CENTER></H3>");
+	        		out.println("<BR></BR>");
+	        		out.println("<H3><CENTER><a href='Subscribe.jsp?Subscribe=1&person_id="+personId+"'><b>Subscribe Data</b></a></CNETER></H3>");
+	        		out.println("<BR></BR>");
+	        		out.println("<H3><CENTER><a href='Analysis.jsp?UploadRecord=1'><b>Data Analysis</b></a></H3>");
 				}
 			
 		%>
 	<BR></BR>
-        <BR></BR>
-        <BR></BR>
-	<H3><CENTER><a href="Search.jsp?SearchRequest=1"><b>Search Records</b></a></CENTER></H3>
-        <BR></BR>
-	<H3><CENTER>
-		<a href="Subscribe.jsp?UploadRecord=1"><b>Subscribe Data</b></a>
-	</H3></CENTER>
-        <BR></BR>
-        <H3><CENTER>
-		<a href="Analysis.jsp?AnalysisData=1"><b>Data Analysis</b></a>
-	</H3></CENTER>
-        <BR></BR>
-        <BR></BR>
+	<BR></BR>
 	<FORM NAME='ReturnForm' ACTION='logout.jsp' METHOD='get'>
-		<CENTER>
-			<INPUT TYPE='submit' NAME='BACK' VALUE='Log out'>
-		</CENTER>
+	<CENTER>
+		<INPUT TYPE='submit' NAME='BACK' VALUE='Log out'>
+	</CENTER>
 	</FORM>
 	<CENTER>User Documentation:<a href='Documentation.html' target ='_blank'><b>Documentation</b></a></CENTER>
 </BODY>

@@ -67,15 +67,16 @@
         	}
 			if(canConnect){
 				String sensorId=request.getParameter("ID");
-				String date=request.getParameter("at");
+				String imgId=request.getParameter("ImgID");
+				String date=request.getParameter("catchDate");
 				String des=request.getParameter("Des");
 				String pathimg=request.getParameter("filePath1");
 				String pathrec=request.getParameter("filePath2");
-				java.util.Date now = new jave.util.Date();
+				//java.util.Date now = new jave.util.Date();
 				Statement s=con.createStatement();
-				String sqlStatement1 = "alter SESSION set NLS_DATE_FORMAT = 'YYYY-MM-DD'";
-				String sqlStatement2="INSERT INTO images VALUES('"+imgId+"','"+sensorId+"','"+date+"','"+des+"','"+pathimg+"',NULL)";
-				s.executeQuery(sqlStatement1);
+				//String sqlStatement1 = "alter SESSION set NLS_DATE_FORMAT = 'YYYY-MM-DD'";
+				String sqlStatement2="INSERT INTO images VALUES('"+imgId+"','"+sensorId+"','"+date+"','"+des+"',NULL,NULL)";
+				//s.executeQuery(sqlStatement1);
 				try{
 					s.executeQuery(sqlStatement2);
 					con.close();
