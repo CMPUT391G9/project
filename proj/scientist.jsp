@@ -32,7 +32,7 @@
     			}
 				
 	      			Statement s=con.createStatement();
-	            	        ResultSet resSet=null;
+	            	ResultSet resSet=null;
 	       			String sqlStatement=null;
 	         		
 	        		sqlStatement="SELECT person_id FROM users WHERE user_name='"+userName+"'";
@@ -71,7 +71,7 @@
 	</H3></CENTER>
         <BR></BR>
         <H3><CENTER>
-		<a href="Analysis.jsp?UploadRecord=1"><b>Data Analysis</b></a>
+		<a href="Analysis.jsp?AnalysisData=1"><b>Data Analysis</b></a>
 	</H3></CENTER>
         <BR></BR>
         <BR></BR>
