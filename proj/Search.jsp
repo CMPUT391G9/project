@@ -174,102 +174,16 @@
         			i++;
             	}
             	
-            	
-            
-            	
-				
-				    		
-            	/* if(((String)session.getAttribute("role")).equals("s")){
-            		sqlString = sqlString +"ar.sensor_id ="+sensorId+", AND i.sensor_id = "+sensorId+", AND sd.sensor_id = "+sensorId ;
-            		out.println("hehe");
-			    } */
-				    	
 
-            	/* if(fdate != null){
-				    sqlString = sqlString + "ar.date_created >= to_date('"+fdate+"','MM/DD/YYYY')"
-				                          +" AND i.date_created  >= to_date('"+fdate+"','MM/DD/YYYY')"
-                                        +" AND sd.date_created >= to_date('"+fdate+"','MM/DD/YYYY')";
-				    out.println("heihei");
-            	}
-
-            	if(tdate != null){
-
-            		sqlString = sqlString + "ar.date_created <= to_date('"+tdate+"','MM/DD/YYYY') "
-                                        + " AND i.date_created  >= to_date('"+tdate+"','MM/DD/YYYY') "
-                                        +" AND sd.date_created >= to_date('"+tdate+"','MM/DD/YYYY') ";
-            		out.println("lala");
-            	} 
-			 */
 
 			    Statement ss = con.createStatement();
 			    ResultSet rs = null;
             	
             	try{
-					/* PreparedStatement setTimeFormat = con.prepareStatement("alter SESSION set NLS_DATE_FORMAT = 'MM/DD/YYYY'");
-					setTimeFormat.executeQuery(); */
-                   
-					/* out.println(sqlString); */
+
+
 		        	rs = ss.executeQuery(sqlString);
 		        	
-
-					
-					/* PreparedStatement doGenerate = con.prepareStatement(sqlString);
-					ResultSet rset2 = doGenerate.executeQuery(); */
-
-					
-					/* out.println("<br>");
-				  	out.println("<br>");
-				  	
-				  	if (searchKey == null && searchLocation == null && searchSType == null){
-	            		out.println("All records from "+fdate+" to "+tdate+":");
-	            	}
-				
-
-	            	if (searchKey == null && searchLocation == null) {
-	            		out.println("All records with sensor type "+searchSType+" from "+fdate+" to "+tdate+":");
-	            	}
-
-	            	if (searchKey == null){
-	            		out.println("All records with sensor type "+searchSType+" and "+searchLocation+" from "+fdate+" to "+tdate+":");
-	            		}
-
-	            	if (searchSType == null && searchLocation == null){
-	            		out.println("All records with "+searchKey+" key words from "+fdate+" to "+tdate+":");
-	            		}
-				
-
-	            	if (searchSType == null && searchKey == null){
-	            		out.println("All records with "+searchLocation+" from "+fdate+" to "+tdate+":");
-	            		}
-				
-
-	            	if (searchLocation == null){
-	            		out.println("All records with sensor type "+searchSType+" and "+searchKey+" from "+fdate+" to "+tdate+":");
-	            	}
-				
-
-	            	if (searchSType == null){
-	            		out.println("All records with keyword "+searchKey+" and "+searchLocation+" from "+fdate+" to "+tdate+":");
-
-	            	}
-	            	
-				  	out.println("<br>");
-				  	out.println("*date format is MM/DD/YYYY");
-				  	out.println("<br>");
-				  	out.println("*click on the thumbnail to see details");
-				  	out.println("<br>");
-					out.println("<table border=1>");
-					out.println("<tr>");
-					out.println("<th>Record ID</th>");
-					out.println("<th></th>");
-					out.println("<th>Sensor ID</th>");
-					out.println("<th>Test Date*</th>");
-					out.println("<th>Prescribing Date*</th>");
-					out.println("<th>Diagnosis*</th>");
-					out.println("<th>Description</th>");
-					out.println("<th>Thumbnail Record Photos*</th>");
-					out.println("</tr>"); */
-
 
             	}
             	
